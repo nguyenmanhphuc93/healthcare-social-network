@@ -21,5 +21,7 @@ namespace HeathcareSystem.ViewModels
         public int Id { get; set; }
         public string Name { get; set; }
         public HospitalViewmodel Hospital { get; set; }
+        public List<ProfileViewmodel> Doctors { get; set; }
+        public DepartmentViewmodel() { }
     }
 }
