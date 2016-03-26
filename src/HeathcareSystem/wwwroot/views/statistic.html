@@ -1,12 +1,12 @@
 ﻿<div class="col-md-4">
-    <table class="table table-bordered">
+    <table class="table table-condensed table-bordered">
         <tr>
-            <td>
+            <th>
                 Diseases
-            </td>
-            <td>
+            </th>
+            <th>
                 Amount
-            </td>
+            </th>
         </tr>
         <tr ng-repeat="disease in diseases">
             <td ng-bind="disease.name"></td>
@@ -17,14 +17,14 @@
 <div class="col-md-8" id="chart_div1"></div>
 
 <div class="col-md-8">
-    <table class="table table-bordered">
+    <table class="table table-condensed table-bordered">
         <tr>
-            <td>
+            <th>
                 Diseases
-            </td>
-            <td>
+            </th>
+            <th>
                 Amount
-            </td>
+            </th>
         </tr>
         <tr ng-repeat="district in districts">
             <td ng-bind="district.name"></td>
@@ -34,3 +34,13 @@
 </div>
 <div class="col-md-8" id="chart_div2"></div>
 
+<style>
+    textarea {
+        width: 100%;
+    }
+
+    th {
+        text-align: center;
+        background-color: rgb(250,250,250);
+    }
+</style>

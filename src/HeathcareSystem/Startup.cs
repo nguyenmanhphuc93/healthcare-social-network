@@ -138,6 +138,7 @@ namespace HeathcareSystem
             }
             
             context.SaveChange();
+            context.SeedNotification();
             context.SeedAppointment();
             context.SaveChange();
 
