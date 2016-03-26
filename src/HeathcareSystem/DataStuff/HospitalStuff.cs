@@ -38,6 +38,7 @@ namespace HeathcareSystem.DataStuff
                     });
                 }
             }
+
             context.SaveChange();
         }
         public static void SeedDisease()
@@ -51,17 +52,10 @@ namespace HeathcareSystem.DataStuff
 
             for (var i = 0; i < 10; i++)
             {
-                List<Department> des = new List<Department>();
-                for (var j = 0; j < 5; j++)
-                {
-                    des.Add(departments[i + j]);
-                }
-
                 context.Hospitals.Add(new Hospital()
                 {
                     Name = $"Hospital{i}",
                     Address = provinces[i / 2],
-                    Departments = des
                 });
             }
             context.SaveChange();
@@ -73,6 +67,8 @@ namespace HeathcareSystem.DataStuff
                 _userManager.CreateUser(profiles[i], $"Doctor{i}", "123456", "Doctor");
             }
         }
+
+        //public static void AddDoctor
         public static void SeedPatient(this UserManager<User> _userManager, List<Profile> profiles)
         {
             for (var i = 0; i < profiles.Count; i++)

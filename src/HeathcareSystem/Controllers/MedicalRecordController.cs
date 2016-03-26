@@ -71,6 +71,7 @@ namespace HeathcareSystem.Controllers
         [HttpPost]
         public void Post()
         {
+
         }
 
         // PUT api/values/5
@@ -93,14 +94,11 @@ namespace HeathcareSystem.Controllers
             using (var context = new HealthCareContext())
             {
                 var medicalRecords = context.MedicalRecords.Where(predicate)
-                                                           .Include(n => n.Department)
-                                                           .Include(n => n.Doctor)
-                                                           .Include(n => n.Hospital)
-                                                           .Include(n => n.Patient)
-                                                           .Include(n => n.Prescription)
-                                                           .ThenInclude(n => n.Medicines)
-                                                           .Include(n => n.Treatment)
-                                                           .Include(n => n.Disease)
+                                                           .Include(n => n.Appointment).ThenInclude(x => x.Department)
+                                                           .Include(n => n.Appointment).ThenInclude(x => x.Doctor)
+                                                           .Include(n => n.Appointment).ThenInclude(x => x.Patient)
+                                                           .Include(n => n.MedicalResults).ThenInclude(n => n.Disease)
+                                                           .Include(n => n.Prescription).ThenInclude(n => n.Medicines)
                                                            .AsEnumerable()
                                                            .Select(n => new MedicalRecordViewmodel(n));
                 return medicalRecords;
@@ -110,12 +108,12 @@ namespace HeathcareSystem.Controllers
 
         internal IEnumerable<MedicalRecordViewmodel> GetMedicalRecordByPatient(int id)
         {
-            return GetMedicalRecord(x => x.PatientId == id && x.Status);
+            return null;
         }
 
         internal IEnumerable<MedicalRecordViewmodel> GetMedicalRecordByDisease(int id, int patientId)
         {
-            return GetMedicalRecord(x => x.DiseaseId == id && x.PatientId == patientId && x.Status);
+            return null ;
         }
     }
 

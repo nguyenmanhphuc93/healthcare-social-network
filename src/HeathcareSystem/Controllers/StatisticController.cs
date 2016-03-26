@@ -3,22 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using Healthcare.Models;
+using HeathcareSystem.DataStuff;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace HeathcareSystem.Controllers
 {
-    [Route("api/[controller]")]
+    
+    [Route("api/[controller]/[action]")]
     public class StatisticController : Controller
     {
-        // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        IHealthcareContext context;
+        public StatisticController(IHealthcareContext context)
         {
-            return new string[] { "value1", "value2" };
+            this.context = context;
         }
 
-        // GET api/values/5
+        [HttpGet]
+        public IActionResult GetProvinces()
+        {
+            var stuff = new GraphStuff();
+
+            return Ok(stuff.SeedSicknessInProvince(context));
+        }
+        [HttpGet]
+        public IActionResult GetDiceases()
+        {
+            var stuff = new GraphStuff();
+
+            return Ok(stuff.SeedLocationSickness(context));
+        }
+
         [HttpGet("{id}")]
         public string Get(int id)
         {

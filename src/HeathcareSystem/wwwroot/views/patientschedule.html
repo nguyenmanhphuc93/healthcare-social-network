@@ -1,107 +1,152 @@
-﻿<table>
-    <tr>
-        <td>
-            Name
-        </td>
-        <td>
-            Time
-        </td>
-        <td>
-            Status
-        </td>
-        <td>
-            Comment
-        </td>
-        <td>
-            Action
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Nguyen Van A
-        </td>
-        <td>
-            08:00 27/03/2016
-        </td>
-        <td>
-            Waiting
-        </td>
-        <td>
-            ...
-        </td>
-        <td>
-            <input type="button" value="Take turn" />
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Nguyen Thi N
-        </td>
-        <td>
-            08:00 27/03/2016
-        </td>
-        <td>
-            Finished
-        </td>
-        <td>
-            ...
-        </td>
-        <td>
-            <input type="button" value="Take turn" />
-        </td>
-    </tr>
-</table>
+﻿<div ng-hide="showPatientForm">
+    <table class="table table-bordered">
+        <tr>
+            <td>
+                Name
+            </td>
+            <td>
+                Time
+            </td>
+            <td>
+                Status
+            </td>
+            <td>
+                Comment
+            </td>
+            <td>
+                Action
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Nguyen Van A
+            </td>
+            <td>
+                08:00 27/03/2016
+            </td>
+            <td>
+                Waiting
+            </td>
+            <td>
+                ...
+            </td>
+            <td>
+                <input class="btn btn-default" type="button" ng-click="showPatientForm = true" value="Take turn" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Nguyen Thi N
+            </td>
+            <td>
+                08:00 27/03/2016
+            </td>
+            <td>
+                Finished
+            </td>
+            <td>
+                ...
+            </td>
+            <td>
+                <input class="btn btn-default" type="button" ng-click="showPatientForm = true" value="Take turn" />
+            </td>
+        </tr>
+    </table>
 
-<table>
-    <tr>
-        <td>
-            Name
-        </td>
-        <td>
-            Time
-        </td>
-        <td>
-            Status
-        </td>
-        <td>
-            Comment
-        </td>
-        <td>
-            Action
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Nguyen Van A
-        </td>
-        <td>
-            08:00 27/03/2016
-        </td>
-        <td>
-            Comming
-        </td>
-        <td>
-            ...
-        </td>
-        <td>
-            <input type="button" value="Take turn" />
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Nguyen Thi N
-        </td>
-        <td>
-            08:00 27/03/2016
-        </td>
-        <td>
-            Skipped
-        </td>
-        <td>
-            ...
-        </td>
-        <td>
-            <input type="button" value="Take turn" />
-        </td>
-    </tr>
-</table>
+    <table class="table table-bordered">
+        <tr>
+            <td>
+                Name
+            </td>
+            <td>
+                Time
+            </td>
+            <td>
+                Status
+            </td>
+            <td>
+                Comment
+            </td>
+            <td>
+                Action
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Nguyen Van A
+            </td>
+            <td>
+                08:00 27/03/2016
+            </td>
+            <td>
+                Comming
+            </td>
+            <td>
+                ...
+            </td>
+            <td>
+                <input class="btn btn-default" type="button" value="Take turn" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Nguyen Thi N
+            </td>
+            <td>
+                08:00 27/03/2016
+            </td>
+            <td>
+                Skipped
+            </td>
+            <td>
+                ...
+            </td>
+            <td>
+                <input class="btn btn-default" type="button" value="Take turn" />
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="patient-form" ng-show="showPatientForm">
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td colspan="4">Ngày</td>
+            </tr>
+            <tr>
+                <td>Hospital</td>
+                <td>
+                    <input class="form-control" type="text" />
+                </td>
+                <td>Doctor</td>
+                <td>
+                    <input class="form-control" type="text" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">Sickness</td>
+                <td colspan="2"><input class="form-control" type="text" /></td>
+            </tr>
+            <tr>
+                <td colspan="2">Diagnose</td>
+                <td colspan="2"><input class="form-control" type="text" /></td>
+            </tr>
+            <tr>
+                <td colspan="2">Examination</td>
+                <td colspan="2"><input class="btn btn-default" type="button" value="Detail" /> </td>
+            </tr>
+            <tr>
+                <td colspan="2">Treatment</td>
+                <td colspan="2"><input class="btn btn-default" type="button" value="Detail" /> </td>
+            </tr>
+            <tr>
+                <td colspan="2">Comment</td>
+                <td colspan="2"><input class="form-control" type="text" /></td>
+            </tr>
+            <tr>
+                <td colspan="3">Add examination</td>
+                <td><input type="checkbox" value="recheck" /> <input class="form-control" type="datetime" /></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
