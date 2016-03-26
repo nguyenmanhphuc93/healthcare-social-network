@@ -26,7 +26,9 @@
     $scope.submit = function () {
         $scope.model.hospitalId = $scope.hospital.id;
         $scope.model.departmentId = $scope.department.id;
-        $scope.model.DoctorId = $scope.doctor.id;
+        if($scope.doctor){
+            $scope.model.DoctorId = $scope.doctor.id;
+        }
         $scope.model.startTime = $('#fromTime').val();
         $scope.model.endTime = $('#toTime').val();
         $http.post('/api/appointment/requestappointment', $scope.model).then(function (data) {
