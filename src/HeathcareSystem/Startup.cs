@@ -134,7 +134,7 @@ namespace HeathcareSystem
                     index = 0;
                 }
             }
-
+            context.SeedAppointment();
             context.SaveChange();
 
         }

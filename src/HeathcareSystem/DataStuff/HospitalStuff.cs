@@ -79,7 +79,7 @@ namespace HeathcareSystem.DataStuff
             {
                 context.Hospitals.Add(new Hospital()
                 {
-                    Name = $"Hospital{i}",
+                    Name = $"Hospital {i}",
                     Address = provinces[i / 2],
                 });
             }
