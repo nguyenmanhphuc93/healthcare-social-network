@@ -18,3 +18,6 @@
 /// <reference path="lib/angular-route/angular-route.js" />
 /// <reference path="lib/angular-ui-router/release/angular-ui-router.js" />
 /// <reference path="lib/oclazyload/dist/oclazyload.js" />
+/// <reference path="services/registerservice.js" />
+/// <reference path="vendor/perfect-scrollbar/perfect-scrollbar.min.js" />
+/// <reference path="vendor/switchery/switchery.min.js" />
