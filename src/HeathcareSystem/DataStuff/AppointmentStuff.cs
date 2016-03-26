@@ -29,7 +29,8 @@ namespace HeathcareSystem.DataStuff
                     PatientId = requests[i].PatientId,
                     Request = requests[i],
                     RequestId = requests[i].Id,
-                    Status = AppointmentStatus.Completed
+                    Status = AppointmentStatus.Completed,
+                    Time = requests[i].StartTime
                 });
             }
             context.SaveChange();

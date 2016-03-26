@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Healthcare.Models;
 using HeathcareSystem.Models;
+using HeathcareSystem.Enums;
 
 namespace HeathcareSystem.DataStuff
 {
@@ -11,7 +12,29 @@ namespace HeathcareSystem.DataStuff
     {
         public static void SeedMedicalRecord(this HealthCareContext context)
         {
-            var medicines = SeedMedicines();
+            var medicalResults = new List<List<MedicalResult>>();
+            var appointments = context.Appointments.Where(a => a.Status == AppointmentStatus.Completed).ToList();
+            for (var i = 0; i<appointments.Count; i++)
+            {
+                medicalResults.Add(SeedMedicalResult(context));
+                context.SeedPrescription();
+            }
+            context.SaveChange();
+            
+            var presciptions = context.Prescriptions.ToList();
+            for(var i = 0;i<appointments.Count; i++)
+            {
+                context.MedicalRecords.Add(new MedicalRecord()
+                {
+                    Appointment = appointments[i],
+                    AppointmentId = appointments[i].Id,
+                    MedicalResults = medicalResults[i],
+                    Prescription = presciptions[i],
+                    PrescriptionId = presciptions[i].Id,
+                    CreatedDate = appointments[i].Time
+                });
+            }
+            context.SaveChange();
         }
         public static List<Medicine> SeedMedicines()
         {
