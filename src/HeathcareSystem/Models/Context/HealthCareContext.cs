@@ -17,6 +17,7 @@ namespace Healthcare.Models
         public DbSet<Examination> Examinations { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
+        public DbSet<AppointmentRequest> AppointmentRequests { get; set; }
 
 
         public int SaveChange()
