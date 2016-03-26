@@ -13,4 +13,12 @@ namespace HeathcareSystem.Enums
         Delay,
         DoctorCancel,
     }
+
+    public enum AppointmentStatus
+    {
+        InProcess,
+        Cancel,
+        Delayed,
+        Completed
+    }
 }
