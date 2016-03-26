@@ -25,7 +25,7 @@
     <link href="vendor/animate.css/animate.min.css" rel="stylesheet" media="screen">
     <link href="vendor/perfect-scrollbar/perfect-scrollbar.min.css" rel="stylesheet" media="screen">
     <link href="vendor/switchery/switchery.min.css" rel="stylesheet" media="screen">
-    
+
     <!--Controllers-->
     <script src="/controllers/indexCtrl.js"></script>
     <script src="/controllers/dashBoardCtrl.js"></script>
@@ -36,6 +36,7 @@
 
     <!--Services-->
     <script src="/services/registertreatmentservice.js"></script>
+    <script src="/services/doctorScheduleService.js"></script>
 
     <script src="/js/config.router.js"></script>
 </head>
@@ -93,7 +94,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li  ng-class="state==5?'active open':''">
+                        <li ng-class="state==5?'active open':''">
                             <a ui-sref="DoctorSchedule" ng-click="state=5">
                                 <div class="item-content">
                                     <div class="item-media">
@@ -105,7 +106,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li  ng-class="state==6?'active open':''">
+                        <li ng-class="state==6?'active open':''">
                             <a ui-sref="Statistic" ng-click="state=6">
                                 <div class="item-content">
                                     <div class="item-media">
@@ -122,8 +123,8 @@
             </div>
         </div>
         <div class="app-content">
-            <header style="background-color:white" class="navbar navbar-default navbar-static-top">  
-            
+            <header style="background-color:white" class="navbar navbar-default navbar-static-top">
+
                 <div class="navbar-collapse" style="margin:0px">
                     <ul class="nav navbar-right">
                         <!-- start: USER OPTIONS DROPDOWN -->

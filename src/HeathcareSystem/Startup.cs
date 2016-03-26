@@ -121,7 +121,7 @@ namespace HeathcareSystem
             userManager.SeedPatient(patientProfiles);
             var managerProfiles = context.SeedProfile(2);
             userManager.SeedManager(managerProfiles);
-            var doctorProfiles = context.SeedProfile(100);
+            var doctorProfiles = context.SeedProfile(48);
             userManager.SeedDoctoc(doctorProfiles);
             var departments = context.Departments.ToList();
             int index = 0;

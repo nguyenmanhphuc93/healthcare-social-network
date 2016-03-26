@@ -18,11 +18,7 @@ namespace HeathcareSystem.DataStuff
                 "Biochemistry",
                 "Cardiovascular surgery",
                 "Obstetrics & Gynecology",
-                "Obstetrics & Gynecology clinic",
                 "Labor &Delivery suite",
-                "Intensive care & Antitoxin",
-                "Laboratory department",
-                "Infection control"
             };
             var hospitals = context.Hospitals.ToList();
             foreach (var hospital in hospitals)
@@ -76,10 +72,10 @@ namespace HeathcareSystem.DataStuff
         }
         private static void SeedHospital(this HealthCareContext context)
         {
-            var provinces = new string[] { "Hồ Chí Minh", "Bình Dương", "Đồng Nai", "Bình Phước", "Bình Thuận", "Tây Ninh" };
+            var provinces = new string[] { "Hồ Chí Minh", "Bình Dương", "Đồng Nai", "Bình Phước" };
             var departments = context.Departments.ToList();
 
-            for (var i = 0; i < 10; i++)
+            for (var i = 0; i < 6; i++)
             {
                 context.Hospitals.Add(new Hospital()
                 {
