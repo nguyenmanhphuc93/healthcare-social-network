@@ -12,7 +12,9 @@
     <link href="/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/js/loader.js"></script>
-
+    <script>
+        var app = angular.module('app', ['ui.router']);
+    </script>
 
     <link rel="stylesheet" href="vendor/fontawesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="vendor/themify-icons/themify-icons.min.css">
@@ -21,6 +23,7 @@
     <link href="vendor/switchery/switchery.min.css" rel="stylesheet" media="screen">
     
     <!--Controllers-->
+    <script src="/controllers/indexCtrl.js"></script>
     <script src="/controllers/dashBoardCtrl.js"></script>
     <script src="/controllers/doctorScheduleCtrl.js"></script>
     <script src="/controllers/patientScheduleCtrl.js"></script>
@@ -34,12 +37,12 @@
 </head>
 <body>
     <div id="app">
-        <div class="sidebar app-aside" id="sidebar">
+        <div ng-controller="IndexCtrl" class="sidebar app-aside" id="sidebar">
             <div class="sidebar-container perfect-scrollbar">
                 <nav>
                     <ul class="main-navigation-menu">
-                        <li class="active open">
-                            <a ui-sref="Dashboard">
+                        <li ng-class="state==1?'active open':''">
+                            <a ui-sref="Dashboard" ng-click="state=1">
                                 <div class="item-content">
                                     <div class="item-media">
                                         <i class="ti-home"></i>
@@ -50,35 +53,47 @@
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="javascript:void(0)">
+                        <li ng-class="state==2?'active open':''">
+                            <a ui-sref="RegisterTreatment" ng-click="state=2">
                                 <div class="item-content">
                                     <div class="item-media">
-                                        <i class="ti-settings"></i>
+                                        <i class="ti-shift-right"></i>
                                     </div>
                                     <div class="item-inner">
-                                        <span class="title"> UI Elements </span>
+                                        <span class="title"> Register For Treatment </span>
                                     </div>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a href="javascript:void(0)">
+                        <li ng-class="state==3?'active open':''">
+                            <a ui-sref="DoctorSchedule" ng-click="state=3">
                                 <div class="item-content">
                                     <div class="item-media">
-                                        <i class="ti-settings"></i>
+                                        <i class="ti-support"></i>
                                     </div>
                                     <div class="item-inner">
-                                        <span class="title"> UI Elements </span>
+                                        <span class="title"> Treatment Plan </span>
                                     </div>
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a ui-sref="DoctorSchedule">
+                        <li ng-class="state==4?'active open':''">
+                            <a ui-sref="PatientSchedule" ng-click="state=4">
                                 <div class="item-content">
                                     <div class="item-media">
-                                        <i class="ti-settings"></i>
+                                        <i class="ti-layers-alt"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <span class="title"> Patient Appointment </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li  ng-class="state==5?'active open':''">
+                            <a ui-sref="DoctorSchedule" ng-click="state=5">
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <i class="ti-bag"></i>
                                     </div>
                                     <div class="item-inner">
                                         <span class="title"> Medical Record </span>
@@ -86,11 +101,11 @@
                                 </div>
                             </a>
                         </li>
-                        <li>
-                            <a ui-sref="Statistic">
+                        <li  ng-class="state==6?'active open':''">
+                            <a ui-sref="Statistic" ng-click="state=6">
                                 <div class="item-content">
                                     <div class="item-media">
-                                        <i class="ti-settings"></i>
+                                        <i class="ti-image"></i>
                                     </div>
                                     <div class="item-inner">
                                         <span class="title"> Statistic </span>
@@ -139,7 +154,7 @@
                     &copy; <span class="current-year"></span><span class="text-bold text-uppercase">Healthcare social network</span> - <span>Smart City Hackathon Contest</span>
                 </div>
                 <div class="pull-right">
-                    <span class="go-top"><i class="ti-angle-up"></i></span>
+                    <span class="go-top" onclick="window.scrollTo(0,0)"><i class="ti-angle-up"></i></span>
                 </div>
             </div>
         </footer>
