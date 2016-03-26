@@ -8,5 +8,6 @@ namespace Healthcare.Models
         [ForeignKey("Profile")]
         public int ProfileId { get; set; }
         public virtual Profile Profile { get; set; }
+        public static object Identity { get; internal set; }
     }
 }
