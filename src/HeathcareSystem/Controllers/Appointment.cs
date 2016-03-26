@@ -23,7 +23,7 @@ namespace HeathcareSystem.Controllers
         public AppointmentController(IHealthcareContext context) : base(context) { }
 
         [HttpPost]
-        public IActionResult RequestAppointment(AppointmentRequestBindingModel model)
+        public IActionResult RequestAppointment([FromBody] AppointmentRequestBindingModel model)
         {
             var appointmentRequest = new AppointmentRequest
             {
