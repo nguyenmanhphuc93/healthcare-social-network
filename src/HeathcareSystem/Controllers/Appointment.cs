@@ -99,7 +99,6 @@ namespace HeathcareSystem.Controllers
             return Ok(appointmentViewModels);
         }
 
-
         #region Helpers
         private Appointment CreateAppointment(Appointment appointment, IHealthcareContext context)
         {
