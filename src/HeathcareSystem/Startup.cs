@@ -8,6 +8,9 @@ using Microsoft.Extensions.Logging;
 using HeathcareSystem.Services;
 using Healthcare.Models;
 using Newtonsoft.Json.Serialization;
+using HeathcareSystem.DataStuff;
+using Microsoft.AspNet.Identity;
+using System.Linq;
 
 namespace HeathcareSystem
 {
@@ -71,16 +74,15 @@ namespace HeathcareSystem
             app.UseDatabaseErrorPage();
 
             // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
-            try
-            {
-                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
-                    .CreateScope())
-                {
-                    //serviceScope.ServiceProvider.GetService<HealthCareContext>()
-                    //     .Database.Migrate();
-                }
-            }
-            catch { }
+
+            var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+                 .CreateScope();
+            var context = serviceScope.ServiceProvider.GetService<HealthCareContext>();
+
+            var userManager = serviceScope.ServiceProvider.GetService<UserManager<User>>();
+            var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole<long>>>();
+            SeedData(context, userManager, roleManager);
+
 
 
             app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
@@ -108,5 +110,32 @@ namespace HeathcareSystem
 
         // Entry point for the application.
         public static void Main(string[] args) => WebApplication.Run<Startup>(args);
+
+        private void SeedData(HealthCareContext context, UserManager<User> userManager, RoleManager<IdentityRole<long>> roleManager)
+        {
+
+            context.SeedDepartment();
+            roleManager.SeedRole();
+            var patientProfiles = context.SeedProfile(5);
+            userManager.SeedPatient(patientProfiles);
+            var managerProfiles = context.SeedProfile(2);
+            userManager.SeedManager(managerProfiles);
+            var doctorProfiles = context.SeedProfile(100);
+            userManager.SeedDoctoc(doctorProfiles);
+            var departments = context.Departments.ToList();
+            int index = 0;
+            foreach (var doctor in departments)
+            {
+                context.Add(new DoctorInDepartment { DepartmentId = departments[index].Id, DoctorId = doctor.Id });
+                index++;
+                if (index == departments.Count)
+                {
+                    index = 0;
+                }
+            }
+
+            context.SaveChange();
+
+        }
     }
 }

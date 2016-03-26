@@ -8,7 +8,7 @@ namespace HeathcareSystem.DataStuff
 {
     public class GraphStuff
     {
-        public List<object> SeedSicknessInProvince(HealthCareContext context)
+        public List<object> SeedSicknessInProvince(IHealthcareContext context)
         {
             var result = new List<object>();
             var provinces = new string[] { "Hồ Chí Minh", "Đồng Nai", "Bình Phước", "Bình Thuận", "Tây Ninh" };
@@ -43,7 +43,7 @@ namespace HeathcareSystem.DataStuff
 
             return result;
         }
-        public List<object> SeedLocationSickness(HealthCareContext context)
+        public List<object> SeedLocationSickness(IHealthcareContext context)
         {
             var result = new List<object>();
             var diseases = context.Diseases.ToList();
