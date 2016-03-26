@@ -7,6 +7,11 @@
     function getData() {
         $http.get('/api/hospital/GetHospitals').then(function (data) {
             $scope.data = data.data;
+            $scope.data.forEach(function (data) {
+                data.hospitals.forEach(function (hospital) {
+                    hospital.departments.push({ name: ''});
+                });
+            });
             $scope.provide = $scope.data[1];
             $scope.$watch('provide', function () {
                 if ($scope.provide && $scope.provide.hospitals) {
@@ -26,7 +31,7 @@
     $scope.submit = function () {
         $scope.model.hospitalId = $scope.hospital.id;
         $scope.model.departmentId = $scope.department.id;
-        if($scope.doctor){
+        if ($scope.doctor) {
             $scope.model.DoctorId = $scope.doctor.id;
         }
         $scope.model.startTime = $('#fromTime').val();
