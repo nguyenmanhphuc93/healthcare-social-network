@@ -22,5 +22,7 @@ namespace HeathcareSystem.ViewModels
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public List<DepartmentViewmodel> Departments { get; set; }
+
+        public HospitalViewmodel() { }
     }
 }
