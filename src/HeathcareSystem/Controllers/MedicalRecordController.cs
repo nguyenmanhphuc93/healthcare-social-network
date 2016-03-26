@@ -47,15 +47,16 @@ namespace HeathcareSystem.Controllers
         [HttpPost]
         public IActionResult RequestRecord([FromBody] RequestingRecord model)
         {
-            if (!ModelState.IsValid)
-            {
-                return new BadRequestResult();
-            }
             if (!User.IsInRole("Doctor"))
             {
                 return new HttpForbiddenResult();
             }
-
+            var record = context.MedicalRecords.SingleOrDefault(n => n.Appointment.Status == AppointmentStatus.InProcess && n.Appointment.Request.PatientId == model.PatientId);
+            if (record == null)
+            {
+                return new BadRequestResult();
+            }
+            model.RecordId = record.Id;
             int requestId = Repository.AddRequest(model);
 
 
@@ -103,6 +104,11 @@ namespace HeathcareSystem.Controllers
             if (CurrentUser.Id != appointment.DoctorId)
             {
                 return new HttpForbiddenResult();
+            }
+            var record = context.MedicalRecords.SingleOrDefault(n => n.AppointmentId == model.AppointmentId);
+            if (record != null)
+            {
+                return Ok(record.Id);
             }
             return Ok(Repository.CreateRecord(model));
         }
@@ -160,8 +166,8 @@ namespace HeathcareSystem.Controllers
         {
             var requests = context.RequestRecords
                                   .Include(n => n.Diseases)
-                                  .Where(n => n.Status == RequestRecordStatus.Accepted && n.RecordId == currentRecordId && n.PatientId == id);
-            var requestedDiseases = requests.SelectMany(request => request.Diseases.Select(d => d.DiseaseId)).Distinct().ToList();
+                                  .Where(n => n.Status == RequestRecordStatus.Accepted && n.RecordId == currentRecordId && n.PatientId == id).ToList();
+            var requestedDiseases = requests.SelectMany(request => request.Diseases.Select(d => d.DiseaseId)).Distinct().ToList().ToList();
             var records = GetMedicalRecord(record => record.Appointment.PatientId == id && record.MedicalResults.Any(result => requestedDiseases.Contains(result.DiseaseId)));
             return records;
         }
@@ -169,6 +175,7 @@ namespace HeathcareSystem.Controllers
         internal int AddRequest(RequestingRecord model)
         {
             model.DiseaseIds = model.DiseaseIds.Distinct().ToList();
+
             var request = new RequestRecord
             {
                 DoctorId = currentUser.Id,
@@ -198,6 +205,9 @@ namespace HeathcareSystem.Controllers
                 AppointmentId = model.AppointmentId,
                 CreatedDate = DateTime.Now,
             };
+            var appointment = context.Appointments.SingleOrDefault(x => x.Id == model.AppointmentId);
+            appointment.Status = AppointmentStatus.InProcess;
+            context.SetState(appointment, EntityState.Modified);
             context.MedicalRecords.Add(record);
             context.SaveChange();
             return record.Id;
