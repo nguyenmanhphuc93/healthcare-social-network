@@ -9,10 +9,10 @@ namespace HeathcareSystem.BindingModels
     public class AppointmentRequestBindingModel
     {
         public int HospitalId { get; set; }
-        public int DepartmentId { get; set; }
-        public int DoctorId { get; set; }
-        public int StartTime { get; set; }
-        public int EndTime { get; set; }
+        public int? DepartmentId { get; set; }
+        public int? DoctorId { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
         public RequestStatus Status { get; set; }
     }
 }
