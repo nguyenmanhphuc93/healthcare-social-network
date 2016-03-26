@@ -166,21 +166,22 @@
                 Diseases
             </td>
             <td>
-                <input class="btn btn-default" type="button" value="Request" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <select class="form-control" ng-options="item as item.name for item in diseases"
-                        ng-model="disease"></select>
-            </td>
-            <td>
-                <input class="btn btn-default" type="button" ng-click="add()" value="Add" />
+                <input class="btn btn-default" type="button" value="Request"  ng-click="request()"/>
             </td>
         </tr>
         <tr ng-repeat="request in requests">
-            <td colspan="2" ng-bind="request.name"></td>
+            <td>
+                <select class="form-control" ng-options="item.id as item.name for item in diseases"
+                        ng-model="request.id"></select>
+            </td>
+            <td>
+                <input class="btn btn-default" type="button" ng-click="add()" value="Add" ng-show="$first"/>
+                <input class="btn btn-default" type="button" ng-click="remove($index)" value="Remove" ng-show="!$first" />
+            </td>
         </tr>
+        <!--<tr ng-repeat="request in requests">
+            <td colspan="2" ng-bind="request.name"></td>
+        </tr>-->
     </table>
 </div>
 <style>

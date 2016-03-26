@@ -18,7 +18,8 @@ app.controller('IndexCtrl', function ($scope, $http) {
             $scope.notifications = data.data;
         });
     };
-    getNotification();
+
+    window.setInterval(getNotification, 3000);
     $http.get('/api/role/GetCurrentUserRoles').then(function (data) {
         $scope.role = data.data[0];
     });

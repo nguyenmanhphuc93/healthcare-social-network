@@ -13,7 +13,7 @@
 
     var startExamination = function (exam) {
         return $http({
-            method: 'GET',
+            method: 'POST',
             url: '/api/MedicalRecord/CreateRecord',
             data: exam
         });
@@ -23,6 +23,14 @@
         return $http({
             method: 'GET',
             url: '/api/Disease/GetAll',
+        });
+    }
+
+    var requestRecords = function (data) {
+        return $http({
+            method: 'POST',
+            url: '/api/MedicalRecord/RequestRecord',
+            data: data
         });
     }
 
@@ -45,21 +53,57 @@
     $scope.startExam = function (appointment) {
         $scope.curPatient = appointment;
         $scope.form = { appointmentId: appointment.id };
-        $scope.showPatientForm = true;
+
+
+        startExamination($scope.form).success(function (data) {
+            $scope.form.id = data;
+            $scope.showPatientForm = true;
+        })
 
     }
 
     function getDisease() {
         $http.get('/api/Disease/GetAll', function (data) {
             $scope.diseases = data.data;
-            console.log($scope.diseases);   
+            console.log($scope.diseases);
         });
     };
     getDisease();
-    $scope.requests = [];
+    $scope.current = 0
+    $scope.requests = [{ index: 0, id: 0 }];
     $scope.add = function () {
-        $scope.requests.push($scope.disease);
-        console.log($scope.requests);
+        $scope.current++;
+        $scope.requests.push({ index: $scope.current, id: 0 });
     };
+    $scope.remove = function (index) {
+        $scope.requests.splice(index, 1);
+    }
+
+    $scope.request = function () {
+        var ids = [];
+        for (var i = 0; i < $scope.requests.length; ++i) {
+            ids.push($scope.requests[i].id);
+        }
+        requestRecords({ patientId: $scope.curPatient.patient.id, diseaseIds: ids }).success(function () {
+            $scope.requests = [{ index: 0, id: 0 }];
+        })
+    }
+
+
+    var getPatientRecordService = function () {
+        return $http({
+            method: 'Get',
+            url: '/api/MedicalRecord/GetRequestedRecordByPatient?id=' +$scope.curPatient.patient.id + '&currentRecordId=' +$scope.form.id,
+        });
+    }
+
+    var getPatientRecord = function () {
+        if (!$scope.form.id) {
+            return;
+        }
+        getPatientRecordService().success(function (data) { $scope.medicalRecords = data });
+    }
+
+    window.setInterval(getPatientRecord, 7000);
 
 });

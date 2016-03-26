@@ -15,6 +15,8 @@ namespace HeathcareSystem.ViewModels
                 this.Patient = new ProfileViewmodel(appointment.Patient);
                 this.Doctor = new ProfileViewmodel(appointment.Doctor);
                 this.Department = new DepartmentViewmodel(appointment.Department);
+                this.Time = appointment.Time;
+                //this.Description = appointment.Request.Description;
             }
 
         }

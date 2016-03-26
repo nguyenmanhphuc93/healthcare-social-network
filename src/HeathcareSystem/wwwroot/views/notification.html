@@ -1,25 +1,23 @@
 ﻿<div class="col-md-12">
     <center><h2>Request detail</h2></center>
     <table class="table table-bordered">
-        <tr>
-            <td colspan="2">Diseases</td>
+        <tr ng-repeat="disease in request.diseases">
+            <td colspan="2" ng-bind="disease.name"></td>
         </tr>
-        <tr>
-            <td colspan="2">
-                Zika
-            </td>
-        </tr>
-        <tr>
+        <!--<tr>
+            <td colspan="2" ng-bind="disease.name"></td>
+        </tr>-->
+        <!--<tr>
             <td colspan="2">
                 Rubenla
             </td>
-        </tr>
+        </tr>-->
         <tr>
             <td>
-                <input class="btn btn-primary" type="button" value="Accept" />
+                <input class="btn btn-primary" type="button" value="Accept" ng-click="accept()" />
             </td>
             <td>
-                <input class="btn btn-default" type="button" value="Deline" />
+                <input class="btn btn-default" type="button" value="Deline" ng-click="reject()" />
             </td>
         </tr>
     </table>

@@ -5,6 +5,7 @@
 /// <reference path="controllers/homeCtrl.js" />
 /// <reference path="controllers/indexCtrl.js" />
 /// <reference path="controllers/medicalrecordctrl.js" />
+/// <reference path="controllers/notificationctrl.js" />
 /// <reference path="controllers/patientScheduleCtrl.js" />
 /// <reference path="controllers/registerTreatmentCtrl.js" />
 /// <reference path="controllers/statisticCtrl.js" />

@@ -44,6 +44,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $con
     .state('Notification', {
         url: '/notification/:type/:id',
         templateUrl: '/views/notification.html',
+        controller: 'NotificationCtrl',
         title: 'Notification'
     })
     .state('PatientSchedule', {
