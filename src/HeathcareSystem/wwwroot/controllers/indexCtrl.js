@@ -12,4 +12,11 @@ app.controller('IndexCtrl', function ($scope, $http) {
             });
         
     };
+
+    function getNotification() {
+        $http.get('/api/medicalrecord/GetNotifications').then(function (data) {
+            $scope.notification = data.data;
+        });
+    };
+    getNotification();
 });
