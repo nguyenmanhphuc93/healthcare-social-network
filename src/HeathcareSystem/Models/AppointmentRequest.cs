@@ -27,5 +27,6 @@ namespace HeathcareSystem.Models
         [ForeignKey("Appointment")]
         public int AppointmentId { get; set; }
         public Appointment Appointment { get; set; }
+        public string Description { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Healthcare.Models
 {
@@ -6,6 +7,9 @@ namespace Healthcare.Models
     {
         [Key]
         public int Id { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
+        [ForeignKey("Hospital")]
+        public int HospitalId { get; set; }
+        public Hospital Hospital { get; set; }
     }
 }

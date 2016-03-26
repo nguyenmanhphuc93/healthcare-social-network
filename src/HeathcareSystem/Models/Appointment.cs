@@ -21,6 +21,7 @@ namespace Healthcare.Models
         public AppointmentStatus Status { get; set; }
         [ForeignKey("Request")]
         public int RequestId { get; set; }
+
         public AppointmentRequest Request { get; set; }
     }
 }
