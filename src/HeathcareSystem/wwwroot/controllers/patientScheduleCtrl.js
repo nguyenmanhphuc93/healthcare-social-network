@@ -56,5 +56,10 @@
         });
     };
     getDisease();
+    $scope.requests = [];
+    $scope.add = function () {
+        $scope.requests.push($scope.disease);
+        console.log($scope.requests);
+    };
 
 });
