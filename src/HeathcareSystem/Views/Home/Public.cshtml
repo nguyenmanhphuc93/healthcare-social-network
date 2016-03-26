@@ -4,12 +4,117 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+
+    <link href="/css/themes/theme-1.css" rel="stylesheet" />
+    <link href="/css/plugins.css" rel="stylesheet" />
+    <link href="/css/styles.css" rel="stylesheet" />
+
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <link href="/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+    <style>
+        .b-img-frame {
+            border: 1px solid rgb(200, 200, 200);
+            margin-right: 7px;
+            margin-bottom: 7px;
+            background-color: white;
+            width: 222px;
+            height: 222px;
+            position: relative;
+            float: left;
+            display: block;
+        }
+
+            .b-img-frame .b-img-frame-inner {
+                position: absolute;
+                width: 210px;
+                left: 5px;
+                top: 5px;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+                .b-img-frame .b-img-frame-inner img {
+                    max-width: 210px;
+                    max-height: 210px;
+                }
+
+        .l-side {
+            padding: 14px;
+            background-color:rgb(240,240,240);
+            min-height:800px;
+        }
+
+        .r-side {
+            text-align: center;
+        }
+
+        .ref-border {
+            margin:auto;
+            background-color:white;
+            width:696px;
+            padding-top:9px;
+            padding-left:9px;
+        }
+          .ref-heading {
+            border: solid rgb(200,200,200) 1px;
+            text-align:center;
+            margin-right:7px;
+            margin-bottom:5px;
+        }
+        .welcome-border{
+                  padding-top: 150px;
+        }
+         .ref-heading p{
+             font-size:32px;
+             margin:0px;
+             padding:14px;
+         }
+    </style>
 </head>
 <body>
-    <div>
-        @*@RenderBody()*@
-
-        public 
+    <div class="col-md-4 r-side pull-right">
+        <div class="welcome-border">
+            <h3>Welcome to</h3>
+            <h1>
+                Healthcare Social Network
+            </h1>
+            <h3>Please login to use the facilities</h3>
+        </div>     
     </div>
+    <div class="col-md-8 l-side pull-right">
+        <div class="ref-border">
+            <div class="ref-heading">
+                <p>
+                    Recent medical events
+                </p>
+            </div>
+            <div class="b-img-frame">
+                <div class="b-img-frame-inner">
+                    <a href="#">
+                        <img src="/images/ref1.jpg">
+                    </a>
+                </div>
+            </div>
+            <div class="b-img-frame">
+                <div class="b-img-frame-inner">
+                    <a href="#">
+                        <img src="/images/ref2.jpg">
+                    </a>
+                </div>
+            </div>
+            <div class="b-img-frame">
+                <div class="b-img-frame-inner">
+                    <a href="#">
+                        <img src="/images/ref3.jpg">
+                    </a>
+                </div>
+            </div>
+            <div style="clear: both">
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
