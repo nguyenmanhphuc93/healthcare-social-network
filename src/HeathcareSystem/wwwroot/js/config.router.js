@@ -65,5 +65,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $con
           controller: 'MedicalRecordCtrl',
           title: 'Medical Record'
       })
+        .state('Test', {
+            url: '/test',
+            templateUrl: '/views/testpage.html',
+            controller: 'TestCtrl',
+            title: 'Test Page'
+        })
 });
 
