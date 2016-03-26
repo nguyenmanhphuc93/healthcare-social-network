@@ -24,15 +24,16 @@ namespace HeathcareSystem.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
-
+        private readonly IHealthcareContext context;
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory, IHealthcareContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = loggerFactory.CreateLogger<AccountController>();
+            this.context = context;
         }
 
         //
@@ -44,6 +45,15 @@ namespace HeathcareSystem.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> GetRoles()
+        {
+            var userName = User.Identity.Name;
+            var currentUser = context.Users.Single(n => n.UserName == userName);
+            var roles = await _userManager.GetRolesAsync(currentUser);
+            return Ok(roles);
+        }
+
 
         //
         // POST: /Account/Login

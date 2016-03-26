@@ -38,7 +38,7 @@ namespace HeathcareSystem.Controllers
             context.SaveChange();
             var appointment = ProccessRequest(appointmentRequest);
             //var appointment
-            return Ok(context);
+            return Ok();
         }
 
         private Appointment ProccessRequest(AppointmentRequest request)
