@@ -1,5 +1,5 @@
 ﻿<div style="width: 800px; margin:auto">
-        <table style="margin-bottom: 7px" class="table table-bordered table-responsive table-striped">
+        <table ng-hide="isSuccess || isError" style="margin-bottom: 7px" class="table table-bordered table-responsive table-striped">
             <tr>
                 <th style="text-align:center; font-size:18px" colspan="2">
                     REGISTER FOR TREATMENT
@@ -82,7 +82,7 @@
                     From:
                 </td>
                 <td>
-                    <input id="fromTime" type="datetime">
+                    <input ng-model="model.fromTime" id="fromTime" type="text">
                 </td>
             </tr>
             <tr>
@@ -90,7 +90,7 @@
                     To:
                 </td>
                 <td>
-                    <input id="toTime" type="datetime">
+                    <input ng-model="model.toTime" id="toTime" type="text">
                 </td>
             </tr>
             <tr>
@@ -98,19 +98,19 @@
                     Doctor (Optional):
                 </td>
                 <td>
-                    <input type="text">
+                    <input ng-model="model.description" type="text">
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <button style="float: right;" class="btn btn-sm btn-primary">
+                    <button ng-click="submit()" style="float: right;" class="btn btn-sm btn-primary">
                         Register
                     </button>
                 </td>
             </tr>
         </table>
        
-    <div class="panel panel-danger" style="width: 400px; margin: auto">
+    <div ng-show="isError" class="panel panel-danger" style="width: 400px; margin: auto">
         <div class="panel-heading">
             Failed!!!
         </div>
@@ -129,7 +129,7 @@
         </div>
     </div>
 
-    <div class="panel panel-primary" style="width: 400px; margin: auto">
+    <div ng-show="isSuccess" class="panel panel-primary" style="width: 400px; margin: auto">
         <div class="panel-heading">
             Successed!!!
         </div>
@@ -141,7 +141,7 @@
             Your appointment is at XX:XX at XXX.
         </div>
         <div>
-            <button style="float: right; margin-right: 14px; margin-bottom: 7px" class="btn btn-sm btn-primary">Ok</button>
+            <button style="float: right; margin-right: 14px; margin-bottom: 7px" class="btn btn-sm btn-primary" ui-sref="Dashboard">Ok</button>
             <div style="clear: both"></div>
         </div>
     </div>
