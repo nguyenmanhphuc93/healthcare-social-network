@@ -1,4 +1,5 @@
 ﻿using Healthcare.Models;
+using HeathcareSystem.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -41,9 +42,40 @@ namespace HeathcareSystem.DataStuff
 
             context.SaveChange();
         }
-        public static void SeedDisease()
+        public static void SeedDisease(this HealthCareContext context)
         {
-
+            var diseases = new string[] {"Fever",
+                                         "Allergy",
+                                         "Nausea",
+                                         "Vomit",
+                                         "Asthma",
+                                         "Chest pain",
+                                         "Dyspnea",
+                                         "Influenza",
+                                         "Anemia",
+                                         "Hypertension",
+                                         "Hypotension",
+                                         "Myocardial ìnarction",
+                                         "Appendicitis",
+                                         "Constipation",
+                                         "Diarrhoea",
+                                         "Coma",
+                                         "Diabetes",
+                                         "Faint",
+                                         "Angina",
+                                         "Chicke - pox",
+                                         "Fracture",
+                                         "Scald",
+                                         "Pestilence",
+                                         "Road accident"};
+            foreach (var item in diseases)
+            {
+                context.Diseases.Add(new Disease()
+                {
+                    Name = item
+                });
+            }
+            context.SaveChange();
         }
         private static void SeedHospital(this HealthCareContext context)
         {
