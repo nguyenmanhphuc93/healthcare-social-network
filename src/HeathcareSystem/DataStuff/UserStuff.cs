@@ -5,7 +5,15 @@ using System.Threading.Tasks;
 
 namespace HeathcareSystem.DataStuff
 {
-    public class UserStuff
+    public static class UserStuff
     {
+        public static void SeedUser()
+        {
+
+        }
+        public static void SeedProfile()
+        {
+
+        }
     }
 }
