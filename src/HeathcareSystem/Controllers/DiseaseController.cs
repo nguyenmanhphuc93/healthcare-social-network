@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using Healthcare.Models;
+using HeathcareSystem.Models;
+using Microsoft.Data.Entity;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,36 +14,48 @@ namespace HeathcareSystem.Controllers
     [Route("api/[controller]")]
     public class DiseaseController : Controller
     {
+        IHealthcareContext context;
+       public DiseaseController(IHealthcareContext context)
+        {
+            this.context = context;
+        }
         // GET: api/values
+        [HttpGet("id")]
+        public IActionResult Get(long id)
+        {
+            var disease = context.Diseases.SingleOrDefault(a => a.Id==id);
+            return Ok(disease);
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult GetAll()
         {
-            return new string[] { "value1", "value2" };
+            var result = context.Diseases.ToList();
+            return Ok(result) ;
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
+        
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult AddNewDisease([FromBody]Disease model)
         {
+            if (!ModelState.IsValid)
+            {
+                return HttpBadRequest();
+            }
+            context.Diseases.Add(model);
+            context.SaveChange();
+            return Ok();
         }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(long id)
         {
+            var disease = context.Diseases.SingleOrDefault(a => a.Id == id);
+            context.SetState(disease, EntityState.Deleted);
+            context.SaveChange();
+            return Ok();
         }
     }
 }
