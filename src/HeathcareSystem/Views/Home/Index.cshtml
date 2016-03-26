@@ -40,9 +40,9 @@
 
     <script src="/js/config.router.js"></script>
 </head>
-<body>
+<body ng-controller="IndexCtrl">
     <div id="app">
-        <div ng-controller="IndexCtrl" class="sidebar app-aside" id="sidebar">
+        <div class="sidebar app-aside" id="sidebar">
             <div class="sidebar-container perfect-scrollbar">
                 <nav>
                     <ul class="main-navigation-menu">
@@ -132,14 +132,14 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="/images/user-2-icon.png" alt=""> <span class="username">User <i class="ti-angle-down"></i></i></span>
                             </a>
-                            <ul class="dropdown-menu dropdown-dark">
+                            <ul class="dropdown-menu">
                                 <li>
                                     <a href="pages_user_profile.html">
                                         My Profile
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="login_signin.html">
+                                    <a ng-click="logout()">
                                         Log Out
                                     </a>
                                 </li>
