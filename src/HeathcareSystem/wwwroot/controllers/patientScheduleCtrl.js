@@ -49,4 +49,12 @@
 
     }
 
+    function getDisease() {
+        $http.get('/api/Disease/GetAll', function (data) {
+            $scope.diseases = data.data;
+            console.log($scope.diseases);   
+        });
+    };
+    getDisease();
+
 });
