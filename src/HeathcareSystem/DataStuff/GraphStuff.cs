@@ -48,17 +48,17 @@ namespace HeathcareSystem.DataStuff
             var result = new List<object>();
             var diseases = context.Diseases.ToList();
             var list = new List<object>();
-            list.Add(new { Name = "Bến Cát", Ammount = 10 });
-            list.Add(new { Name = "Phú Giáo", Ammount = 30 });
-            list.Add(new { Name = "Tp.Thủ Dầu Một", Ammount = 20 });
-            list.Add(new { Name = "Bàu Bàng", Ammount = 20 });
+            list.Add(new { Name = "Bến Cát", Ammount = 11 });
+            list.Add(new { Name = "Phú Giáo", Ammount = 29 });
+            list.Add(new { Name = "Tp.Thủ Dầu Một", Ammount = 23 });
+            list.Add(new { Name = "Bàu Bàng", Ammount = 17 });
             list.Add(new { Name = "Dầu Tiếng", Ammount = 20 });
             result.Add(new { Name = "Hypotension", Provinces = list});
 
             list = new List<object>();
             list.Add(new { Name = "Bến Cát", Ammount = 15 });
-            list.Add(new { Name = "Phú Giáo", Ammount = 15 });
-            list.Add(new { Name = "Bàu Bàng", Ammount = 20 });
+            list.Add(new { Name = "Phú Giáo", Ammount = 14 });
+            list.Add(new { Name = "Bàu Bàng", Ammount = 21 });
             result.Add(new { Name = "Anemia", Provinces = list});
 
             list = new List<object>();
