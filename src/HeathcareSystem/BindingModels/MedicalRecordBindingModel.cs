@@ -11,4 +11,9 @@ namespace HeathcareSystem.BindingModels
         public List<int> DiseaseIds { get; set; }
         public int RecordId { get; set; }
     }
+
+    public class CreateRecordBindingModel
+    {
+        public int AppointmentId { get; set; }
+    }
 }

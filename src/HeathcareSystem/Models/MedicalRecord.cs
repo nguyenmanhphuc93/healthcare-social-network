@@ -17,7 +17,7 @@ namespace HeathcareSystem.Models
         public virtual Appointment Appointment { get; set; }
         public DateTime CreatedDate { get; set; }
         [ForeignKey("Prescription")]
-        public int PrescriptionId { get; set; }
+        public int? PrescriptionId { get; set; }
         public virtual Prescription Prescription { get; set; }
         public virtual ICollection<MedicalResult> MedicalResults { get; set; }
     }

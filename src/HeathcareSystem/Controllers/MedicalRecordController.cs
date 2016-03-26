@@ -17,7 +17,6 @@ using HeathcareSystem.Enums;
 
 namespace HeathcareSystem.Controllers
 {
-    [Authorize]
     [Route("api/[controller]/[action]")]
     public partial class MedicalRecordController : BaseController
     {
@@ -45,32 +44,43 @@ namespace HeathcareSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult RequestRecord(RequestingRecord model)
+        public IActionResult RequestRecord([FromBody]RequestingRecord model)
         {
+            if (!ModelState.IsValid)
+            {
+                return new BadRequestResult();
+            }
             if (!User.IsInRole("Doctor"))
             {
                 return new HttpForbiddenResult();
             }
             model.DiseaseIds = model.DiseaseIds.Distinct().ToList();
+            var request = new RequestRecord
+            {
+                DoctorId = CurrentUser.Id,
+                PatientId = model.PatientId,
+                RecordId = model.RecordId,
+                Status = RequestRecordStatus.Pending,
+                Diseases = new List<DiseasesInRequest>(),
+            };
 
             model.DiseaseIds.ForEach(id =>
             {
-                var request = new RequestRecord
-                {
-                    DoctorId = CurrentUser.Id,
-                    PatientId = model.PatientId,
-                    RecordId = model.RecordId,
-                    Status = RequestRecordStatus.Pending,
-                    DiseaseId = id,
-                };
-                context.RequestRecords.Add(request);
+                request.Diseases.Add(
+                                    new DiseasesInRequest
+                                    {
+                                        DiseaseId = id,
+                                    });
             });
+            context.RequestRecords.Add(request);
             context.SaveChange();
 
-            return Ok();
+            CreateNotification(CurrentUser.Id, model.PatientId, $"Dr.{CurrentUser.FirstName} sent a request to ask your permission. ", string.Empty /*URL*/);
+
+            return Ok(request.Id);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
         public IActionResult GetRequestedRecordByPatient(int id, int currentRecordId)
         {
             if (!User.IsInRole("Doctor"))
@@ -81,27 +91,40 @@ namespace HeathcareSystem.Controllers
         }
 
         [HttpGet]
-        public void A()
+        public IActionResult GetRequestRecord(int id)
         {
+            return Ok(Repository.GetRequestRecordViewModel(id));
+        }
 
+        [HttpPut]
+        public IActionResult ComfirmRequest(int id, [FromBody]RequestRecordStatus status)
+        {
+            if (status == RequestRecordStatus.Pending)
+            {
+                return Ok();
+            }
+            var request = context.RequestRecords.SingleOrDefault(x => x.Id == id);
+            if (request == null || request.Status != RequestRecordStatus.Pending)
+            {
+                return new HttpNotFoundResult();
+            }
+            request.Status = status;
+            context.SetState(request, EntityState.Modified);
+            context.SaveChange();
+            return Ok();
         }
 
         [HttpPost]
-        public void Post()
+        public IActionResult CreateRecord(CreateRecordBindingModel model)
         {
-
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var record = new MedicalRecord
+            {
+                AppointmentId = model.AppointmentId,
+                CreatedDate = DateTime.Now,
+            };
+            context.MedicalRecords.Add(record);
+            context.SaveChange();
+            return Ok(record.Id);
         }
     }
 
@@ -124,6 +147,30 @@ namespace HeathcareSystem.Controllers
             }
         }
 
+        private RequestRecord GetRequestRecord(Expression<Func<RequestRecord, bool>> predicate)
+        {
+            using (var context = new HealthCareContext())
+            {
+                var request = context.RequestRecords
+                                     .Include(n => n.Patient)
+                                     .Include(n => n.Record)
+                                     .Include(n => n.Diseases).ThenInclude(n => n.Disease)
+                                     .SingleOrDefault(predicate);
+                return request;
+
+            }
+        }
+
+        internal RequestRecordViewmodel GetRequestRecordViewModel(int id)
+        {
+            return new RequestRecordViewmodel(GetRequestRecord(x => x.Id == id));
+        }
+
+        internal RequestRecord GetRequestRecord(int id)
+        {
+            return GetRequestRecord(x => x.Id == id);
+        }
+
         internal IEnumerable<MedicalRecordViewmodel> GetMedicalRecordByPatient(int id)
         {
             return GetMedicalRecord(x => x.Appointment.PatientId == id);
@@ -134,8 +181,10 @@ namespace HeathcareSystem.Controllers
             List<int> requestedDiseases = null;
             using (var context = new HealthCareContext())
             {
-                var requests = context.RequestRecords.Where(n => n.Status == RequestRecordStatus.Accepted && n.RecordId == currentRecordId && n.PatientId == id);
-                requestedDiseases = requests.Select(request => request.DiseaseId).ToList();
+                var requests = context.RequestRecords
+                                      .Include(n => n.Diseases)
+                                      .Where(n => n.Status == RequestRecordStatus.Accepted && n.RecordId == currentRecordId && n.PatientId == id);
+                requestedDiseases = requests.SelectMany(request => request.Diseases.Select(d => d.DiseaseId)).Distinct().ToList();
             }
             var records = GetMedicalRecord(record => record.Appointment.PatientId == id && record.MedicalResults.Any(result => requestedDiseases.Contains(result.DiseaseId)));
             return records;
