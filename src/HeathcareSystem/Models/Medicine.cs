@@ -4,6 +4,6 @@ namespace Healthcare.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Amount { get; set; }
+        public string Quantity { get; set; }
     }
 }
