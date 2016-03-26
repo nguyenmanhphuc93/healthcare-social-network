@@ -9,6 +9,10 @@ namespace HeathcareSystem.DataStuff
 {
     public static class MedicalRecordStuff
     {
+        public static void SeedMedicalRecord(this HealthCareContext context)
+        {
+            var medicines = SeedMedicines();
+        }
         public static List<Medicine> SeedMedicines()
         {
             var drugs = new string[]
