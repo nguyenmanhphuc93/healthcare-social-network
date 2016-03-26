@@ -18,6 +18,7 @@ using HeathcareSystem.Enums;
 namespace HeathcareSystem.Controllers
 {
     [Route("api/[controller]/[action]")]
+    [Authorize]
     public partial class MedicalRecordController : BaseController
     {
         private MedicalRecordRespository repository;
