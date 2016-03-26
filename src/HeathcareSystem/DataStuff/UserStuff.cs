@@ -16,6 +16,8 @@ namespace HeathcareSystem.DataStuff
                 UserName = userName,
                 Profile = profile,
             };
+            context.Users.Add(user);
+            context.SaveChange();
         }
         public static void SeedProfile(this HealthCareContext context, int count = 50)
         {
