@@ -47,13 +47,13 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $con
         controller: 'PatientScheduleCtrl',
         title: 'Schedule'
     })
-    .state('registerTreatment', {
+    .state('RegisterTreatment', {
         url: '/registertreatment',
         templateUrl: '/views/registertreatment.html',
         controller: 'RegisterTreatmentCtrl',
         title: 'Register treatment'
     })
-     .state('statistic', {
+     .state('Statistic', {
          url: '/statistic',
          templateUrl: '/views/statistic.html',
          controller: 'StatisticCtrl',

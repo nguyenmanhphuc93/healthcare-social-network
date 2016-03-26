@@ -22,10 +22,7 @@ namespace HeathcareSystem.DataStuff
                 "Labor &Delivery suite",
                 "Intensive care & Antitoxin",
                 "Laboratory department",
-                "Infection control",
-                "Internal medicine clinic",
-                "Pediatric clinic",
-                "Rehabilitation"
+                "Infection control"
             };
             var hospitals = context.Hospitals.ToList();
             foreach (var hospital in hospitals)
