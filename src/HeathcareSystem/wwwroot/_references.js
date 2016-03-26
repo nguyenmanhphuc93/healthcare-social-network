@@ -18,6 +18,7 @@
 /// <reference path="lib/angular-route/angular-route.js" />
 /// <reference path="lib/angular-ui-router/release/angular-ui-router.js" />
 /// <reference path="lib/oclazyload/dist/oclazyload.js" />
+/// <reference path="services/doctorscheduleservice.js" />
 /// <reference path="services/registerTreatmentService.js" />
 /// <reference path="vendor/moment/moment.js" />
 /// <reference path="vendor/perfect-scrollbar/perfect-scrollbar.min.js" />
