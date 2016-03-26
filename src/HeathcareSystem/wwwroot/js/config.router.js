@@ -59,5 +59,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $con
          controller: 'StatisticCtrl',
          title: 'Statistic'
      })
+      .state('MedicalRecord', {
+          url: '/medicalrecord',
+          templateUrl: '/views/medicalrecord.html',
+          controller: 'MedicalRecordCtrl',
+          title: 'Medical Record'
+      })
 });
 
