@@ -19,4 +19,8 @@ app.controller('IndexCtrl', function ($scope, $http) {
         });
     };
     getNotification();
+    $http.get('/api/role/GetCurrentUserRoles').then(function (data) {
+        console.log(data);
+        $scope.role = data.data[0];
+    });
 });
