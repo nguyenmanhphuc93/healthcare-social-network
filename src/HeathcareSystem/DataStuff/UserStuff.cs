@@ -1,4 +1,5 @@
 ﻿using Healthcare.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace HeathcareSystem.DataStuff
 {
     public static class UserStuff
     {
-        public static void SeedUser(this HealthCareContext context, Profile profile, string email, string userName)
+        public static void CreateUser(this UserManager<User> _usermanager, Profile profile,  string userName,string password, String role)
         {
             var user = new User()
             {
@@ -16,8 +17,10 @@ namespace HeathcareSystem.DataStuff
                 UserName = userName,
                 Profile = profile,
             };
-            context.Users.Add(user);
-            context.SaveChange();
+            _usermanager.CreateAsync(user, password);
+            _usermanager.AddToRoleAsync(user, role);
+          
+            
         }
         public static void SeedProfile(this HealthCareContext context, int count = 50)
         {
