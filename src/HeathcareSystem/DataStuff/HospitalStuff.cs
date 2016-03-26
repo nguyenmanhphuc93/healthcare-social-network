@@ -11,6 +11,7 @@ namespace HeathcareSystem.DataStuff
     {
         public static void SeedDepartment(this HealthCareContext context)
         {
+            context.SeedHospital();
             var department = new string[]
             {
                 "Biochemistry",
@@ -25,28 +26,33 @@ namespace HeathcareSystem.DataStuff
                 "Pediatric clinic",
                 "Rehabilitation"
             };
-            foreach (var item in department)
+            var hospitals = context.Hospitals.ToList();
+            foreach (var hospital in hospitals)
             {
-                context.Departments.Add(new Department()
+                foreach (var item in department)
                 {
-                    Name = item
-                });
+                    context.Departments.Add(new Department()
+                    {
+                        Name = item,
+                        HospitalId = hospital.Id
+                    });
+                }
             }
             context.SaveChange();
-        }   
+        }
         public static void SeedDisease()
         {
 
-        } 
-        public static void SeedHospital(this HealthCareContext context)
+        }
+        private static void SeedHospital(this HealthCareContext context)
         {
             var provinces = new string[] { "Hồ Chí Minh", "Bình Dương", "Đồng Nai", "Bình Phước", "Bình Thuận", "Tây Ninh" };
             var departments = context.Departments.ToList();
 
-            for(var i = 0; i < 10; i++)
+            for (var i = 0; i < 10; i++)
             {
                 List<Department> des = new List<Department>();
-                for(var j = 0; j< 5; j++)
+                for (var j = 0; j < 5; j++)
                 {
                     des.Add(departments[i + j]);
                 }
@@ -55,14 +61,14 @@ namespace HeathcareSystem.DataStuff
                 {
                     Name = $"Hospital{i}",
                     Address = provinces[i / 2],
-                    Departments = des            
+                    Departments = des
                 });
             }
             context.SaveChange();
         }
         public static void SeedDoctoc(this UserManager<User> _userManager, List<Profile> profiles)
         {
-           for(var i = 0; i<profiles.Count; i++)
+            for (var i = 0; i < profiles.Count; i++)
             {
                 _userManager.CreateUser(profiles[i], $"Doctor{i}", "123456", "Doctor");
             }
@@ -81,6 +87,6 @@ namespace HeathcareSystem.DataStuff
                 _userManager.CreateUser(profiles[i], $"Manager{i}", "123456", "Manager");
             }
         }
-        
+
     }
 }
