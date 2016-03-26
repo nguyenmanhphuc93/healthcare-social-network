@@ -5,9 +5,13 @@ using System.Threading.Tasks;
 
 namespace HeathcareSystem.DataStuff
 {
-    public static class RoleStuff
+    public static class GraphStuff
     {
-        public static void SeedRole()
+        public static void SeedSicknessInProvince()
+        {
+
+        }
+        public  static void SeedLocationSickness()
         {
 
         }
