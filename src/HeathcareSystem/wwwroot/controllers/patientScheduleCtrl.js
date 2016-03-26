@@ -19,12 +19,25 @@
         });
     }
 
+    var getDiseases = function () {
+        return $http({
+            method: 'GET',
+            url: '/api/Disease/GetAll',
+        });
+    }
+
+    getDiseases().success(function (data) {
+        $scope.diseases = data;
+    })
+
     getIncommingPatient().success(function (data) {
         $scope.patients = data;
         for (var i = 0; i < data.length; ++i) {
             $scope.patients[i].time = moment($scope.patients[i].time);
         }
     })
+
+
 
     $scope.currentDate = moment().format("DD/MM/YYYY");
     //console.log($scope.currentDate)
