@@ -127,7 +127,7 @@ namespace HeathcareSystem
             var profiles = userManager.SeedDoctor(context, 48);
             var departments = context.Departments.ToList();
             int index = 0;
-            foreach (var doctor in departments)
+            foreach (var doctor in profiles)
             {
                 context.DoctorInDepartments.Add(new DoctorInDepartment { DepartmentId = departments[index].Id, DoctorId = doctor.Id });
                 index++;
