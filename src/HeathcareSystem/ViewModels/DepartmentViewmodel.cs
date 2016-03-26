@@ -15,11 +15,17 @@ namespace HeathcareSystem.ViewModels
                 this.Id = department.Id;
                 this.Name = department.Name;
             }
-          
-            //if (department.Hospital != null)
-            //{
-            //    Hospital = new HospitalViewmodel(department.Hospital);
-            //}
+
+            if (department.Hospital != null)
+            {
+                this.Hospital = new HospitalViewmodel
+                {
+                    Address = department.Hospital.Address,
+                    Name = department.Hospital.Name,
+                    Id = department.Hospital.Id,
+                    PhoneNumber = department.Hospital.PhoneNumber,
+                };
+            }
 
         }
         public int Id { get; set; }
