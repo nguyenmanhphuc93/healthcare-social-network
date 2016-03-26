@@ -10,9 +10,13 @@ namespace HeathcareSystem.ViewModels
     {
         public AppointmentViewModel(Appointment appointment)
         {
-            this.Patient = new ProfileViewmodel(appointment.Patient);
-            this.Doctor = new ProfileViewmodel(appointment.Doctor);
-            this.Department = new DepartmentViewmodel(appointment.Department);
+            if (appointment != null)
+            {
+                this.Patient = new ProfileViewmodel(appointment.Patient);
+                this.Doctor = new ProfileViewmodel(appointment.Doctor);
+                this.Department = new DepartmentViewmodel(appointment.Department);
+            }
+
         }
         public AppointmentViewModel()
         {

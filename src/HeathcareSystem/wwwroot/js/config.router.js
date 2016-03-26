@@ -47,6 +47,11 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $con
         controller: 'PatientScheduleCtrl',
         title: 'Schedule'
     })
+    .state('Schedule', {
+        url: '/schedule',
+        templateUrl: '/views/schedule.html',
+        title: 'Schedule'
+    })
     .state('RegisterTreatment', {
         url: '/registertreatment',
         templateUrl: '/views/registertreatment.html',

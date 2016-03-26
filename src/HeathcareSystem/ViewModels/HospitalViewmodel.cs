@@ -10,12 +10,14 @@ namespace HeathcareSystem.ViewModels
     {
         public HospitalViewmodel(Hospital hospital)
         {
-            this.Id = hospital.Id;
-            this.Name = hospital.Name;
-            this.Address = hospital.Address;
-            this.PhoneNumber = hospital.PhoneNumber;
-            this.Departments = hospital.Departments?.Select(x => new DepartmentViewmodel(x)).ToList() ?? new List<DepartmentViewmodel>();
-
+            if(hospital != null)
+            {
+                this.Id = hospital.Id;
+                this.Name = hospital.Name;
+                this.Address = hospital.Address;
+                this.PhoneNumber = hospital.PhoneNumber;
+                this.Departments = hospital.Departments?.Select(x => new DepartmentViewmodel(x)).ToList() ?? new List<DepartmentViewmodel>();
+            }
         }
         public int Id { get; set; }
         public string Name { get; set; }

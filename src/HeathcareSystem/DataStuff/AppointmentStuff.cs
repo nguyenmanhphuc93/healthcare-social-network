@@ -2,6 +2,7 @@
 using HeathcareSystem.Enums;
 using HeathcareSystem.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,19 +42,20 @@ namespace HeathcareSystem.DataStuff
             var random = new Random();
             var doctors = context.DoctorInDepartments.Select(a => a.Doctor).ToList();
             var doctorInDepartments = context.DoctorInDepartments.ToList();
-            var users = context.Users.ToList();
+            var users = context.Users.Include(a=> a.Profile).ToList();
             var hospitals = context.Hospitals.ToList();
             var appoinments = context.Appointments.ToList();
+            var patient1 = context.Users.Include(a => a.Profile).SingleOrDefault(a => a.UserName.ToLower() == "patient1").Profile;
+            var doctorInDepartment = doctorInDepartments.SingleOrDefault(a=> a.Doctor.DisplayName.ToLower() == "doctor1");
             for (var i = 0; i < count; i++)
             {
-                var doctorInDepartment = doctorInDepartments[random.Next(doctorInDepartments.Count)];
+                
                 var day = random.Next(1, 28);
                 var month = random.Next(1, 12);
                 var year = random.Next(2000, 2014);
-                var user = users[random.Next(users.Count)].Profile;
-                while (user.Id == doctorInDepartment.DoctorId)
+                while (patient1.Id == doctorInDepartment.DoctorId)
                 {
-                    user = users[random.Next(users.Count)].Profile;
+                    patient1 = users[i].Profile;
                 }
                 context.AppointmentRequests.Add(new AppointmentRequest()
                 {
@@ -63,8 +65,8 @@ namespace HeathcareSystem.DataStuff
                     DoctorId = doctorInDepartment.DoctorId,
                     Hospital = doctorInDepartment.Department.Hospital,
                     HospitalId = doctorInDepartment.Department.Hospital.Id,
-                    Patient = user,
-                    PatientId = user.Id,
+                    Patient = patient1,
+                    PatientId = patient1.Id,
                     StartTime = new DateTime(year, month, day),
                     EndTime = new DateTime(year, month, day + 1)
                 });

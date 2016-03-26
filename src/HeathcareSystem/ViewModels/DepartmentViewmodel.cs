@@ -10,12 +10,16 @@ namespace HeathcareSystem.ViewModels
     {
         public DepartmentViewmodel(Department department)
         {
-            this.Id = department.Id;
-            this.Name = department.Name;
-            if (department.Hospital != null)
+            if(department != null)
             {
-                Hospital = new HospitalViewmodel(department.Hospital);
+                this.Id = department.Id;
+                this.Name = department.Name;
             }
+          
+            //if (department.Hospital != null)
+            //{
+            //    Hospital = new HospitalViewmodel(department.Hospital);
+            //}
 
         }
         public int Id { get; set; }

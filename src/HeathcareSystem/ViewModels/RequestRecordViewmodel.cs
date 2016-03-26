@@ -12,12 +12,15 @@ namespace HeathcareSystem.ViewModels
     {
         public RequestRecordViewmodel(RequestRecord requestRecord)
         {
-            this.Id = requestRecord.Id;
-            this.Status = requestRecord.Status;
-            this.Doctor = new ProfileViewmodel(requestRecord.Doctor);
-            this.Patient = new ProfileViewmodel(requestRecord.Doctor);
-            this.Record = new MedicalRecordViewmodel(requestRecord.Record);
-            this.Diseases = requestRecord.Diseases?.Select(x => new DiseaseViewmodel(x.Disease)).ToList() ?? new List<DiseaseViewmodel>();
+            if (requestRecord != null)
+            {
+                this.Id = requestRecord.Id;
+                this.Status = requestRecord.Status;
+                this.Doctor = new ProfileViewmodel(requestRecord.Doctor);
+                this.Patient = new ProfileViewmodel(requestRecord.Patient);
+                this.Record = new MedicalRecordViewmodel(requestRecord.Record);
+                this.Diseases = requestRecord.Diseases?.Select(x => new DiseaseViewmodel(x.Disease)).ToList() ?? new List<DiseaseViewmodel>();
+            }
         }
         public int Id { get; set; }
         public ProfileViewmodel Doctor { get; set; }

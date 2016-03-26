@@ -10,8 +10,11 @@ namespace HeathcareSystem.ViewModels
     {
         public DiseaseViewmodel(Disease disease)
         {
-            this.Id = disease.Id;
-            this.Description = disease.Description;
+            if(disease != null)
+            {
+                this.Id = disease.Id;
+                this.Description = disease.Description;
+            }
         }
         public int Id { get; set; }
         public string Description { get; set; }
