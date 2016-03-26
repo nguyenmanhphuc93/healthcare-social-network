@@ -7,7 +7,4 @@
             $scope.appointments[i].time = moment($scope.appointments[i].time);
         }
     })
-
-
-
 });

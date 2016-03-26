@@ -105,7 +105,7 @@ namespace HeathcareSystem.Controllers
         [HttpGet]
         public IActionResult GetDoctorInCommingAppoitnment()
         {
-            var appointments = context.Appointments.Include(n => n.Request.Doctor).Where(n => n.DoctorId == CurrentUser.Id && (n.Status == AppointmentStatus.InProcess || n.Status == AppointmentStatus.Inqueue));
+            var appointments = context.Appointments.Include(n => n.Request.Doctor).Include(n => n.Request.Patient).Where(n => n.DoctorId == CurrentUser.Id && (n.Status == AppointmentStatus.InProcess || n.Status == AppointmentStatus.Inqueue));
             var appointmentViewModels = new List<AppointmentViewModel>();
             foreach (var a in appointments)
             {

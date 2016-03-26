@@ -84,14 +84,14 @@
                                 </div>
                             </a>
                         </li>
-                        <li ng-class="state==4?'active open':''">
-                            <a ui-sref="Schedule" ng-click="state=4">
+                        <li ng-show="role == 'Doctor'" ng-class="state==4?'active open':''">
+                            <a ui-sref="PatientSchedule" ng-click="state=4">
                                 <div class="item-content">
                                     <div class="item-media">
                                         <i class="ti-layers-alt"></i>
                                     </div>
                                     <div class="item-inner">
-                                        <span class="title"> Appointment </span>
+                                        <span class="title">Patient Appointment </span>
                                     </div>
                                 </div>
                             </a>
@@ -108,7 +108,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li ng-class="state==6?'active open':''">
+                        <li ng-show="role == 'Manager'" ng-class="state==6?'active open':''">
                             <a ui-sref="Statistic" ng-click="state=6">
                                 <div class="item-content">
                                     <div class="item-media">
