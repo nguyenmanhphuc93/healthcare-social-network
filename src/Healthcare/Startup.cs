@@ -40,9 +40,9 @@ namespace Healthcare
         {
             // Add framework services.
             services.AddEntityFramework()
-                .AddSqlServer()
+                .AddInMemoryDatabase()
                 .AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+                    options.UseInMemoryDatabase());
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -53,6 +53,7 @@ namespace Healthcare
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            //services.AddScoped<IHealthcareContext>(provider => provider.GetServices<HealthcareContext>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,29 +61,22 @@ namespace Healthcare
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            app.UseDeveloperExceptionPage();
+            app.UseDatabaseErrorPage();
+            //app.UseExceptionHandler("/Home/Error");
 
-            if (env.IsDevelopment())
+            // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
+            try
             {
-                app.UseBrowserLink();
-                app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-
-                // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
-                try
+                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+                    .CreateScope())
                 {
-                    using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
-                        .CreateScope())
-                    {
-                        serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
-                             .Database.Migrate();
-                    }
+                    //serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
+                    //     .Database.Migrate();
                 }
-                catch { }
             }
+            catch { }
+            //}
 
             app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
             app.UseDefaultFiles();
@@ -95,8 +89,15 @@ namespace Healthcare
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                 name: "default",
+                 template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                   name: "api",
+                   template: "api/{controller}/{action}/{id?}");
+                routes.MapRoute(
+                   name: "api2",
+                   template: "api/{controller}/{id?}");
+                routes.MapRoute("DeepLink", "{*pathInfo}", defaults: new { controller = "Home", action = "Index" });
             });
         }
 
