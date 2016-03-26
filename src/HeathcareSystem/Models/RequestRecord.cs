@@ -17,7 +17,9 @@ namespace HeathcareSystem.Models
         [ForeignKey("Patient")]
         public int PatientId { get; set; }
         public User Patient { get; set; }
-        public ICollection<Disease> Diseases { get; set; }
+        [ForeignKey("Disease")]
+        public int DiseaseId { get; set; }
+        public Disease Disease { get; set; }
         public RequestRecordStatus Status { get; set; }
         [ForeignKey("Record")]
         public int RecordId { get; set; }
