@@ -1,2 +1,36 @@
-﻿<div class="col-md-12" id="chart_div1"></div>
-<div class="col-md-12" id="chart_div2"></div>
+﻿<div class="col-md-4">
+    <table class="table table-bordered">
+        <tr>
+            <td>
+                Diseases
+            </td>
+            <td>
+                Amount
+            </td>
+        </tr>
+        <tr ng-repeat="disease in diseases">
+            <td ng-bind="disease.name"></td>
+            <td ng-bind="disease.ammount"></td>
+        </tr>
+    </table>
+</div>
+<div class="col-md-8" id="chart_div1"></div>
+
+<div class="col-md-4">
+    <table class="table table-bordered">
+        <tr>
+            <td>
+                Diseases
+            </td>
+            <td>
+                Amount
+            </td>
+        </tr>
+        <tr ng-repeat="district in districts">
+            <td ng-bind="district.name"></td>
+            <td ng-bind="district.ammount"></td>
+        </tr>
+    </table>
+</div>
+<div class="col-md-8" id="chart_div2"></div>
+

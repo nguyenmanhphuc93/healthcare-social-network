@@ -10,6 +10,8 @@ using HeathcareSystem.ViewModels;
 using Microsoft.AspNet.Authorization;
 using HeathcareSystem.Models;
 using System.Linq.Expressions;
+using HeathcareSystem.BindingModels;
+using HeathcareSystem.Enums;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -37,35 +39,51 @@ namespace HeathcareSystem.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult GetRecords()
         {
             return Ok(Repository.GetMedicalRecordByPatient(CurrentUser.Id));
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetByPatient(int id, int diseaseId = 0)
+        [HttpPost]
+        public IActionResult RequestRecord(RequestingRecord model)
         {
-            if (CurrentUser.Id == id || IsRequested(id))
+            if (!User.IsInRole("Doctor"))
             {
-                IEnumerable<MedicalRecordViewmodel> records = null;
-                if (diseaseId == 0)
-                {
-                    records = Repository.GetMedicalRecordByPatient(id);
-                }
-                else
-                {
-                    records = Repository.GetMedicalRecordByDisease(diseaseId, id);
-                }
-                return Ok(records);
+                return new HttpForbiddenResult();
             }
-            return new HttpForbiddenResult();
+            model.DiseaseIds = model.DiseaseIds.Distinct().ToList();
 
+            model.DiseaseIds.ForEach(id =>
+            {
+                var request = new RequestRecord
+                {
+                    DoctorId = CurrentUser.Id,
+                    PatientId = model.PatientId,
+                    RecordId = model.RecordId,
+                    Status = RequestRecordStatus.Pending,
+                    DiseaseId = id,
+                };
+                context.RequestRecords.Add(request);
+            });
+            context.SaveChange();
 
+            return Ok();
         }
 
-        private bool IsRequested(int id)
+        [HttpGet("{id}")]
+        public IActionResult GetRequestedRecordByPatient(int id, int currentRecordId)
         {
-            return true;
+            if (!User.IsInRole("Doctor"))
+            {
+                return new HttpForbiddenResult();
+            }
+            return Ok(Repository.GetRequestedRecordByPatient(id, currentRecordId));
+        }
+
+        [HttpGet]
+        public void A()
+        {
+
         }
 
         [HttpPost]
@@ -94,7 +112,7 @@ namespace HeathcareSystem.Controllers
             using (var context = new HealthCareContext())
             {
                 var medicalRecords = context.MedicalRecords.Where(predicate)
-                                                           .Include(n => n.Appointment).ThenInclude(x => x.Department)
+                                                           .Include(n => n.Appointment).ThenInclude(x => x.Department).ThenInclude(x => x.Hospital)
                                                            .Include(n => n.Appointment).ThenInclude(x => x.Doctor)
                                                            .Include(n => n.Appointment).ThenInclude(x => x.Patient)
                                                            .Include(n => n.MedicalResults).ThenInclude(n => n.Disease)
@@ -108,12 +126,19 @@ namespace HeathcareSystem.Controllers
 
         internal IEnumerable<MedicalRecordViewmodel> GetMedicalRecordByPatient(int id)
         {
-            return null;
+            return GetMedicalRecord(x => x.Appointment.PatientId == id);
         }
 
-        internal IEnumerable<MedicalRecordViewmodel> GetMedicalRecordByDisease(int id, int patientId)
+        internal IEnumerable<MedicalRecordViewmodel> GetRequestedRecordByPatient(int id, int currentRecordId)
         {
-            return null ;
+            List<int> requestedDiseases = null;
+            using (var context = new HealthCareContext())
+            {
+                var requests = context.RequestRecords.Where(n => n.Status == RequestRecordStatus.Accepted && n.RecordId == currentRecordId && n.PatientId == id);
+                requestedDiseases = requests.Select(request => request.DiseaseId).ToList();
+            }
+            var records = GetMedicalRecord(record => record.Appointment.PatientId == id && record.MedicalResults.Any(result => requestedDiseases.Contains(result.DiseaseId)));
+            return records;
         }
     }
 
