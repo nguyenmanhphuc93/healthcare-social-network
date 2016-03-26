@@ -44,7 +44,7 @@ namespace HeathcareSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult RequestRecord([FromBody]RequestingRecord model)
+        public IActionResult RequestRecord([FromBody] RequestingRecord model)
         {
             if (!ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace HeathcareSystem.Controllers
         }
 
         [HttpPut]
-        public IActionResult ComfirmRequest(int id, [FromBody]RequestRecordStatus status)
+        public IActionResult ComfirmRequest(int id, RequestRecordStatus status)
         {
             if (status == RequestRecordStatus.Pending)
             {
@@ -115,7 +115,7 @@ namespace HeathcareSystem.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateRecord(CreateRecordBindingModel model)
+        public IActionResult CreateRecord([FromBody] CreateRecordBindingModel model)
         {
             var record = new MedicalRecord
             {
