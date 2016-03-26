@@ -1,0 +1,156 @@
+﻿<div style="width: 800px">
+    <div class="b-frame">
+        <div class="b-frame-heading">
+            REGISTER FOR TREATMENT
+        </div>
+        <table style="margin-bottom: 7px" class="table table-bordered">
+            <tr>
+                <td>
+                    City/Province:
+                </td>
+                <td>
+                    <select>
+                        <option>
+                            Binh Duong
+                        </option>
+                        <option>
+                            Binh Phuoc
+                        </option>
+                        <option>
+                            Bien Hoa
+                        </option>
+                        <option>
+                            Ho Chi Minh
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Hospital/Clinic:
+                </td>
+                <td>
+                    <select>
+                        <option>
+                            Nearest (My Phuoc Hospital)
+                        </option>
+                        <option>
+                            Thu Dau Mot Hospital
+                        </option>
+                        <option>
+                            Eastern International Hospital
+                        </option>
+                        <option>
+                            My Phuoc Hospital
+                        </option>
+                        <option>
+                            Happy Hospital
+                        </option>
+                        <option>
+                            Phu Chanh Clinic
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Department:
+                </td>
+                <td>
+                    <select>
+                        <option>
+                            Ear nose and throat (ENT)
+                        </option>
+                        <option>
+                            Accident and emergency (A&E)
+                        </option>
+                        <option>
+                            Cardiology
+                        </option>
+                        <option>
+                            General surgery
+                        </option>
+                        <option>
+                            Gynaecology
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Time:
+                </td>
+                <td>
+                    <input type="datetime">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Doctor (Optional):
+                </td>
+                <td>
+                    <input type="text">
+                </td>
+            </tr>
+        </table>
+        <button style="margin-bottom: 7px; margin-right: 7px; float: right;" class="btn btn-sm btn-primary">
+            Register
+        </button>
+        <div style="clear: both"></div>
+    </div>
+    <div class="panel panel-danger" style="width: 400px; margin: auto">
+        <div class="panel-heading">
+            Failed!!!
+        </div>
+        <div class="panel-body">
+            <h3>
+                We can not complete your treatment schedule!!!
+            </h3>
+            There is already an appointment at ...
+            <br>
+            Please choose another time
+        </div>
+        <div>
+            <button style="float: right; margin-right: 14px; margin-bottom: 7px" class="btn btn-sm btn-danger">Cancel</button>
+            <button style="float: right; margin-right: 7px; margin-bottom: 7px" class="btn btn-sm btn-default">Choose time</button>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div class="panel panel-primary" style="width: 400px; margin: auto">
+        <div class="panel-heading">
+            Successed!!!
+        </div>
+        <div class="panel-body">
+            <h3>
+                You have completed a treatment schedule!!!
+            </h3>
+            Your appointment is at XX:XX at XXX.
+        </div>
+        <div>
+            <button style="float: right; margin-right: 14px; margin-bottom: 7px" class="btn btn-sm btn-primary">Ok</button>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+</div>
+<style>
+    .b-frame {
+        border: rgb(240, 240, 240) solid 1px;
+    }
+
+        .b-frame .b-frame-heading {
+            height: 32px;
+            text-align: center;
+            font-size: 18px;
+            color: white;
+            background-color: #222222;
+        }
+
+    input {
+        width: 100%;
+    }
+
+    select {
+        height: 30px;
+        width: 100%;
+    }
+</style>
