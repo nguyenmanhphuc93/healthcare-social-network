@@ -1,21 +1,21 @@
-﻿<div ng-hide="showPatientForm">
-    <table class="table table-bordered">
+﻿<div class="col-md-12" ng-hide="showPatientForm">
+    <table class="table table-bordered table-condensed">
         <tr>
-            <td>
+            <th>
                 Name
-            </td>
-            <td>
+            </th>
+            <th>
                 Time
-            </td>
-            <td>
+            </th>
+            <th>
                 Status
-            </td>
-            <td>
+            </th>
+            <th>
                 Comment
-            </td>
-            <td>
+            </th>
+            <th>
                 Action
-            </td>
+            </th>
         </tr>
         <tr>
             <td>
@@ -31,7 +31,7 @@
                 ...
             </td>
             <td>
-                <input class="btn btn-default" type="button" ng-click="showPatientForm = true" value="Take turn" />
+                <input class="btn btn-sm btn-default" type="button" ng-click="showPatientForm = true" value="Take turn" />
             </td>
         </tr>
         <tr>
@@ -48,28 +48,28 @@
                 ...
             </td>
             <td>
-                <input class="btn btn-default" type="button" ng-click="showPatientForm = true" value="Take turn" />
+                <input class="btn btn-sm btn-default" type="button" ng-click="showPatientForm = true" value="Take turn" />
             </td>
         </tr>
     </table>
 
-    <table class="table table-bordered">
+    <table class="table table-bordered  table-condensed">
         <tr>
-            <td>
+            <th>
                 Name
-            </td>
-            <td>
+            </th>
+            <th>
                 Time
-            </td>
-            <td>
+            </th>
+            <th>
                 Status
-            </td>
-            <td>
+            </th>
+            <th>
                 Comment
-            </td>
-            <td>
+            </th>
+            <th>
                 Action
-            </td>
+            </th>
         </tr>
         <tr>
             <td>
@@ -85,7 +85,7 @@
                 ...
             </td>
             <td>
-                <input class="btn btn-default" type="button" value="Take turn" />
+                <input class="btn btn-sm btn-default" type="button" value="Show detail" />
             </td>
         </tr>
         <tr>
@@ -102,51 +102,66 @@
                 ...
             </td>
             <td>
-                <input class="btn btn-default" type="button" value="Take turn" />
+                <input class="btn btn-sm btn-default" type="button" value="Show detail" />
             </td>
         </tr>
     </table>
 </div>
-<div id="patient-form" ng-show="showPatientForm">
+<div id="patient-form" class="col-md-12" ng-show="showPatientForm">
     <table class="table table-bordered">
         <tbody>
             <tr>
-                <td colspan="4">Ngày</td>
+                <th colspan="4">Ngày</th>
             </tr>
             <tr>
-                <td>Hospital</td>
+                <td>Hospital:</td>
                 <td>
                     <input class="form-control" type="text" />
                 </td>
-                <td>Doctor</td>
+                <td>Doctor:</td>
                 <td>
                     <input class="form-control" type="text" />
                 </td>
             </tr>
             <tr>
-                <td colspan="2">Sickness</td>
-                <td colspan="2"><input class="form-control" type="text" /></td>
+                <td colspan="1">Sickness:</td>
+                <td colspan="3"><input class="form-control" type="text" /></td>
             </tr>
             <tr>
-                <td colspan="2">Diagnose</td>
-                <td colspan="2"><input class="form-control" type="text" /></td>
+                <td colspan="1">Diagnose:</td>
+                <td colspan="3"><input class="form-control" type="text" /></td>
             </tr>
             <tr>
-                <td colspan="2">Examination</td>
-                <td colspan="2"><input class="btn btn-default" type="button" value="Detail" /> </td>
+                <td colspan="1">Examination:</td>
+                <td colspan="3"><button class="btn btn-sm btn-default">Add Examination</button> </td>
             </tr>
             <tr>
-                <td colspan="2">Treatment</td>
-                <td colspan="2"><input class="btn btn-default" type="button" value="Detail" /> </td>
+                <td colspan="1">Treatment:</td>
+                <td colspan="3"><textarea></textarea> </td>
             </tr>
             <tr>
-                <td colspan="2">Comment</td>
-                <td colspan="2"><input class="form-control" type="text" /></td>
+                <td colspan="1">Comment:</td>
+                <td colspan="3"><input class="form-control" type="text" /></td>
             </tr>
             <tr>
-                <td colspan="3">Add examination</td>
-                <td><input type="checkbox" value="recheck" /> <input class="form-control" type="datetime" /></td>
+                <td colspan="1"><input type="checkbox" /> Re-check</td>
+                <td colspan="3">At: <input type="datetime"></td>
+            </tr>
+            <tr>
+                <td colspan="4">    
+                    <button style="margin-left:7px;" class="btn btn-sm btn-primary pull-right">Finish</button>     
+                    <button class="btn btn-sm btn-default pull-right">Cancel</button>            
+                </td>
             </tr>
         </tbody>
     </table>
 </div>
+<style>
+    textarea{
+        width:100%;
+    }
+    th{
+        text-align:center;
+        background-color:rgb(250,250,250);
+    }
+</style>
