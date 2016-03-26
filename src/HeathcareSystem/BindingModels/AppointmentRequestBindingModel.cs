@@ -14,5 +14,6 @@ namespace HeathcareSystem.BindingModels
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public RequestStatus Status { get; set; }
+        public string Description { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace HeathcareSystem.Enums
         InProcess,
         Cancel,
         Delayed,
-        Completed
+        Completed,
+        Inqueue,
     }
 }
