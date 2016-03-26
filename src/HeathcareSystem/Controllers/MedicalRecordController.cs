@@ -75,7 +75,7 @@ namespace HeathcareSystem.Controllers
             context.RequestRecords.Add(request);
             context.SaveChange();
 
-            CreateNotification(CurrentUser.Id, model.PatientId, $"Dr.{CurrentUser.FirstName} sent a request to ask your permission. ", string.Empty /*URL*/);
+            CreateNotification(CurrentUser.Id, model.PatientId, $"Dr.{CurrentUser.FirstName} sent a request to ask your permission. ", $"api/MedicalRecord/GetRequestRecord/{request.Id}");
 
             return Ok(request.Id);
         }
@@ -117,6 +117,15 @@ namespace HeathcareSystem.Controllers
         [HttpPost]
         public IActionResult CreateRecord([FromBody] CreateRecordBindingModel model)
         {
+            var appointment = context.Appointments.SingleOrDefault(x => x.Id == model.AppointmentId);
+            if (appointment == null)
+            {
+                return new HttpNotFoundResult();
+            }
+            if (CurrentUser.Id != appointment.DoctorId)
+            {
+                return new HttpForbiddenResult();
+            }
             var record = new MedicalRecord
             {
                 AppointmentId = model.AppointmentId,
