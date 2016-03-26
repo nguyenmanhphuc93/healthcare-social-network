@@ -32,7 +32,6 @@ namespace HeathcareSystem.Models
         public virtual Prescription Prescription { get; set; }
         [ForeignKey("Disease")]
         public int DiseaseId { get; set; }
-        [ForeignKey("Disease")]
         public virtual Disease Disease { get; set; }
         public DateTime CreatedDate { get; set; }
         public bool Status { get; set; }//false == deleted
