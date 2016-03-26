@@ -127,13 +127,15 @@ namespace HeathcareSystem
             int index = 0;
             foreach (var doctor in departments)
             {
-                context.Add(new DoctorInDepartment { DepartmentId = departments[index].Id, DoctorId = doctor.Id });
+                context.DoctorInDepartments.Add(new DoctorInDepartment { DepartmentId = departments[index].Id, DoctorId = doctor.Id });
                 index++;
                 if (index == departments.Count)
                 {
                     index = 0;
                 }
             }
+            
+            context.SaveChange();
             context.SeedAppointment();
             context.SaveChange();
 

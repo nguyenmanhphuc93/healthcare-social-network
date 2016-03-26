@@ -13,6 +13,7 @@ namespace HeathcareSystem.DataStuff
     {
         public static void SeedAppointment(this HealthCareContext context)
         {
+            context.SeedAppointmentRequest();
             var random = new Random();
             var requests = context.AppointmentRequests.ToList();
             var doctorInDepartments = context.DoctorInDepartments.ToList();
@@ -31,6 +32,7 @@ namespace HeathcareSystem.DataStuff
                     Status = AppointmentStatus.Completed
                 });
             }
+            context.SaveChange();
 
         }
         public static void SeedAppointmentRequest(this HealthCareContext context, int count = 20)
@@ -66,6 +68,7 @@ namespace HeathcareSystem.DataStuff
                     EndTime = new DateTime(year, month, day + 1)
                 });
             }
+            context.SaveChange();
 
         }
     }
