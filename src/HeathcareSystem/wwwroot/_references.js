@@ -8,6 +8,7 @@
 /// <reference path="controllers/registerTreatmentCtrl.js" />
 /// <reference path="controllers/statisticCtrl.js" />
 /// <reference path="js/config.constant.js" />
+/// <reference path="js/loader.js" />
 /// <reference path="js/router.config.js" />
 /// <reference path="js/site.js" />
 /// <reference path="lib/angular/angular.js" />
