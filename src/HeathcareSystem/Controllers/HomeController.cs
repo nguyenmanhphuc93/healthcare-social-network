@@ -10,7 +10,13 @@ namespace HeathcareSystem.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+
+
+                return PartialView();
+            }
+            return PartialView("Public");
         }
 
         public IActionResult About()
