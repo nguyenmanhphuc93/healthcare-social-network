@@ -140,6 +140,7 @@ namespace HeathcareSystem
             context.SaveChange();
             context.SeedNotification();
             context.SeedAppointment();
+            context.SeedMedicalRecord();
             context.SaveChange();
 
         }
