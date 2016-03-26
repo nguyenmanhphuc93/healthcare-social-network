@@ -139,12 +139,13 @@
                                 <li>
                                     <div class="drop-down-wrapper ps-container">
                                         <div class="list-group no-margin">
-                                            <a class="media list-group-item" href="">
-                                                <span class="media-body block no-margin"> Notification 1 </span>
-                                            </a>
-                                            <a class="media list-group-item" href="">
-                                                <span class="media-body block no-margin"> Notification 2 </span>
-                                            </a>
+                                            @*<a class="media list-group-item" href="">
+                                                    <span class="media-body block no-margin"> Notification 1 </span>
+                                                </a>
+                                                <a class="media list-group-item" href="">
+                                                    <span class="media-body block no-margin"> Notification 2 </span>
+                                                </a>*@
+                                            <a ng-repeat="noti in notifications">{{noti.content}}</a>
                                         </div>
                                     </div>
                                 </li>
