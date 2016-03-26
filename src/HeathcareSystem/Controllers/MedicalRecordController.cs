@@ -28,7 +28,7 @@ namespace HeathcareSystem.Controllers
             {
                 if (this.repository == null)
                 {
-                    this.repository = new MedicalRecordRespository(context);
+                    this.repository = new MedicalRecordRespository(context, CurrentUser);
                 }
                 return this.repository;
             }
@@ -55,30 +55,13 @@ namespace HeathcareSystem.Controllers
             {
                 return new HttpForbiddenResult();
             }
-            model.DiseaseIds = model.DiseaseIds.Distinct().ToList();
-            var request = new RequestRecord
-            {
-                DoctorId = CurrentUser.Id,
-                PatientId = model.PatientId,
-                RecordId = model.RecordId,
-                Status = RequestRecordStatus.Pending,
-                Diseases = new List<DiseasesInRequest>(),
-            };
 
-            model.DiseaseIds.ForEach(id =>
-            {
-                request.Diseases.Add(
-                                    new DiseasesInRequest
-                                    {
-                                        DiseaseId = id,
-                                    });
-            });
-            context.RequestRecords.Add(request);
-            context.SaveChange();
+            int requestId = Repository.AddRequest(model);
 
-            CreateNotification(CurrentUser.Id, model.PatientId, $"Dr.{CurrentUser.FirstName} sent a request to ask your permission. ", $"api/MedicalRecord/GetRequestRecord/{request.Id}");
 
-            return Ok(request.Id);
+            CreateNotification(CurrentUser.Id, model.PatientId, $"Dr.{CurrentUser.FirstName} sent a request to ask your permission. ", $"api/MedicalRecord/GetRequestRecord/{requestId}");
+
+            return Ok(requestId);
         }
 
         [HttpGet]
@@ -102,16 +85,10 @@ namespace HeathcareSystem.Controllers
         {
             if (status == RequestRecordStatus.Pending)
             {
-                return Ok();
+                return new HttpForbiddenResult();
             }
-            var request = context.RequestRecords.SingleOrDefault(x => x.Id == id);
-            if (request == null || request.Status != RequestRecordStatus.Pending)
-            {
-                return new HttpNotFoundResult();
-            }
-            request.Status = status;
-            context.SetState(request, EntityState.Modified);
-            context.SaveChange();
+            Repository.ComfirmRequest(id, status);
+
             return Ok();
         }
 
@@ -127,23 +104,18 @@ namespace HeathcareSystem.Controllers
             {
                 return new HttpForbiddenResult();
             }
-            var record = new MedicalRecord
-            {
-                AppointmentId = model.AppointmentId,
-                CreatedDate = DateTime.Now,
-            };
-            context.MedicalRecords.Add(record);
-            context.SaveChange();
-            return Ok(record.Id);
+            return Ok(Repository.CreateRecord(model));
         }
     }
 
     public class MedicalRecordRespository
     {
         IHealthcareContext context;
-        public MedicalRecordRespository(IHealthcareContext context)
+        Profile currentUser;
+        public MedicalRecordRespository(IHealthcareContext context, Profile currentUser)
         {
             this.context = context;
+            this.currentUser = currentUser;
         }
         private IEnumerable<MedicalRecordViewmodel> GetMedicalRecord(Expression<Func<MedicalRecord, bool>> predicate)
         {
@@ -192,6 +164,55 @@ namespace HeathcareSystem.Controllers
             var requestedDiseases = requests.SelectMany(request => request.Diseases.Select(d => d.DiseaseId)).Distinct().ToList();
             var records = GetMedicalRecord(record => record.Appointment.PatientId == id && record.MedicalResults.Any(result => requestedDiseases.Contains(result.DiseaseId)));
             return records;
+        }
+
+        internal int AddRequest(RequestingRecord model)
+        {
+            model.DiseaseIds = model.DiseaseIds.Distinct().ToList();
+            var request = new RequestRecord
+            {
+                DoctorId = currentUser.Id,
+                PatientId = model.PatientId,
+                RecordId = model.RecordId,
+                Status = RequestRecordStatus.Pending,
+                Diseases = new List<DiseasesInRequest>(),
+            };
+
+            model.DiseaseIds.ForEach(id =>
+            {
+                request.Diseases.Add(
+                                    new DiseasesInRequest
+                                    {
+                                        DiseaseId = id,
+                                    });
+            });
+            context.RequestRecords.Add(request);
+            context.SaveChange();
+            return request.Id;
+        }
+
+        internal int CreateRecord(CreateRecordBindingModel model)
+        {
+            var record = new MedicalRecord
+            {
+                AppointmentId = model.AppointmentId,
+                CreatedDate = DateTime.Now,
+            };
+            context.MedicalRecords.Add(record);
+            context.SaveChange();
+            return record.Id;
+        }
+
+        internal void ComfirmRequest(int id, RequestRecordStatus status)
+        {
+            var request = context.RequestRecords.SingleOrDefault(x => x.Id == id);
+            if (request == null || request.Status != RequestRecordStatus.Pending)
+            {
+                return;
+            }
+            request.Status = status;
+            context.SetState(request, EntityState.Modified);
+            context.SaveChange();
         }
     }
 
