@@ -10,20 +10,8 @@
                     City/Province:
                 </td>
                 <td>
-                    <select>
-                        <option>
-                            Binh Duong
-                        </option>
-                        <option>
-                            Binh Phuoc
-                        </option>
-                        <option>
-                            Bien Hoa
-                        </option>
-                        <option>
-                            Ho Chi Minh
-                        </option>
-                    </select>
+                    <select ng-options="item as item.province for item in data"
+                            ng-model="provide"></select>
                 </td>
             </tr>
             <tr>
@@ -31,26 +19,8 @@
                     Hospital/Clinic:
                 </td>
                 <td>
-                    <select>
-                        <option>
-                            Nearest (My Phuoc Hospital)
-                        </option>
-                        <option>
-                            Thu Dau Mot Hospital
-                        </option>
-                        <option>
-                            Eastern International Hospital
-                        </option>
-                        <option>
-                            My Phuoc Hospital
-                        </option>
-                        <option>
-                            Happy Hospital
-                        </option>
-                        <option>
-                            Phu Chanh Clinic
-                        </option>
-                    </select>
+                    <select ng-options="item as item.name for item in provide.hospitals"
+                             ng-model="hospital"></select>
                 </td>
             </tr>
             <tr>
@@ -58,23 +28,8 @@
                     Department:
                 </td>
                 <td>
-                    <select>
-                        <option>
-                            Ear nose and throat (ENT)
-                        </option>
-                        <option>
-                            Accident and emergency (A&E)
-                        </option>
-                        <option>
-                            Cardiology
-                        </option>
-                        <option>
-                            General surgery
-                        </option>
-                        <option>
-                            Gynaecology
-                        </option>
-                    </select>
+                    <select ng-options="item as item.name for item in hospital.departments"
+                            ng-model="department"></select>
                 </td>
             </tr>
             <tr>
