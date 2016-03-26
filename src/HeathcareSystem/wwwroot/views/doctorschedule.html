@@ -10,41 +10,17 @@
             <th>
                 Doctor
             </th>
-            <!--<td>
-                Action
-            </td>-->
         </tr>
-        <tr>
-            <td>
-                08:00 27/03/2016
-            </td>
-            <td>
-                Becamex Hospital
-            </td>
-            <td>
-                Tran Cong Duy
-            </td>
-            <!--<td>
-                <input class="btn btn-default" type="button" value="Take turn" />
-            </td>-->
-        </tr>
-        <tr>
-            <td>
-                09:00 01/04/2016
-            </td>
-            <td>
-                My Phuoc Hospital
-            </td>
-            <td></td>
-            <!--<td>
-                <input class="btn btn-default" type="button" value="Take turn" />
-            </td>-->
+        <tr ng-repeat="appointment in appointments">
+            <td ng-bind="appointment.time"></td>
+            <td ng-bind="appointment.department.hospital.name"></td>
+            <td ng-bind="appointment.doctor.name"></td>
         </tr>
     </table>
 </div>
 <style>
-    th{
-         text-align:center;
-        background-color:rgb(250,250,250);
+    th {
+        text-align: center;
+        background-color: rgb(250,250,250);
     }
 </style>
