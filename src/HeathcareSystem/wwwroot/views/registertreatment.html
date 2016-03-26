@@ -1,79 +1,83 @@
 ﻿<div style="width: 800px; margin:auto">
-        <table ng-hide="isSuccess || isError" style="margin-bottom: 7px" class="table table-bordered table-responsive table-striped">
-            <tr>
-                <th style="text-align:center; font-size:18px" colspan="2">
-                    REGISTER FOR TREATMENT
-                </th>
-            </tr>
-            <tr>
-                <td>
-                    City/Province:
-                </td>
-                <td>
-                    <select ng-options="item as item.province for item in data"
-                            ng-model="provide"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Hospital/Clinic:
-                </td>
-                <td>
-                    <select ng-options="item as item.name for item in provide.hospitals"
-                             ng-model="hospital"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Department:
-                </td>
-                <td>
-                    <select ng-options="item as item.name for item in hospital.departments"
-                            ng-model="department"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    From:
-                </td>
-                <td>
+    <table ng-hide="isSuccess || isError" style="margin-bottom: 7px" class="table table-bordered table-responsive table-striped">
+        <tr>
+            <th style="text-align:center; font-size:18px" colspan="2">
+                REGISTER FOR TREATMENT
+            </th>
+        </tr>
+        <tr>
+            <td>
+                City/Province:
+            </td>
+            <td>
+                <select ng-options="item as item.province for item in data"
+                        ng-model="provide"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Hospital/Clinic:
+            </td>
+            <td>
+                <select ng-options="item as item.name for item in provide.hospitals"
+                        ng-model="hospital"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Department:
+            </td>
+            <td>
+                <select ng-options="item as item.name for item in hospital.departments"
+                        ng-model="department"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                From:
+            </td>
+            <td>
+                <div style="position:relative">
                     <input ng-model="model.fromTime" id="fromTime" type="text">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    To:
-                </td>
-                <td>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                To:
+            </td>
+            <td>
+                <div style="position:relative">
                     <input ng-model="model.toTime" id="toTime" type="text">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Doctor (Optional):
-                </td>
-                <td>
-                    <select ng-options="item as item.displayName for item in department.doctors"
-                            ng-model="doctor"></select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Description:
-                </td>
-                <td>
-                    <input type="text" ng-model="model.Description"/>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <button ng-click="submit()" style="float: right;" class="btn btn-sm btn-primary">
-                        Register
-                    </button>
-                </td>
-            </tr>
-        </table>
-       
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Doctor (Optional):
+            </td>
+            <td>
+                <select ng-options="item as item.displayName for item in department.doctors"
+                        ng-model="doctor"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Description:
+            </td>
+            <td>
+                <input type="text" ng-model="model.Description" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button ng-click="submit()" style="float: right;" class="btn btn-sm btn-primary">
+                    Register
+                </button>
+            </td>
+        </tr>
+    </table>
+
     <div ng-show="isError" class="panel panel-danger" style="width: 400px; margin: auto">
         <div class="panel-heading">
             Failed!!!
@@ -113,8 +117,8 @@
 </div>
 <div style="clear:both; height:60px"></div>
 <style>
-    .panel-body{
-        color:rgb(80,80,80);
+    .panel-body {
+        color: rgb(80,80,80);
     }
 
     input {
