@@ -10,8 +10,11 @@ namespace HeathcareSystem.ViewModels
     {
         public TreatmentViewmodel(Treatment treatment)
         {
-            this.Id = treatment.Id;
-            this.Description = treatment.Description;
+            if(treatment == null)
+            {
+                this.Id = treatment.Id;
+                this.Description = treatment.Description;
+            }
         }
         public int Id { get; set; }
         public string Description { get; set; }

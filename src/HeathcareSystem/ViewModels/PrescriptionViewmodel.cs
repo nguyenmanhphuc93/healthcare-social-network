@@ -10,9 +10,12 @@ namespace HeathcareSystem.ViewModels
     {
         public PrescriptionViewmodel(Prescription prescription)
         {
-            this.Id = prescription.Id;
-            this.Note = prescription.Note;
-            this.Medicines = prescription.Medicines?.Select(x => new MedicineViewmodel(x)).ToList() ?? new List<MedicineViewmodel>();
+            if(prescription != null)
+            {
+                this.Id = prescription.Id;
+                this.Note = prescription.Note;
+                this.Medicines = prescription.Medicines?.Select(x => new MedicineViewmodel(x)).ToList() ?? new List<MedicineViewmodel>();
+            }
         }
         public int Id { get; set; }
         public string Note { get; set; }

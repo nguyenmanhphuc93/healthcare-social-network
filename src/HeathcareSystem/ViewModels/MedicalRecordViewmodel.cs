@@ -10,11 +10,14 @@ namespace HeathcareSystem.ViewModels
     {
         public MedicalRecordViewmodel(MedicalRecord record)
         {
-            this.Id = record.Id;
-            this.CreatedDate = record.CreatedDate;
-            this.Appointment = new AppointmentViewModel(record.Appointment);
-            this.Prescription = new PrescriptionViewmodel(record.Prescription);
-            this.MedicalResults = record.MedicalResults?.Select(x => new MedicalResultViewmodel(x)).ToList() ?? new List<MedicalResultViewmodel>();
+            if(record != null)
+            {
+                this.Id = record.Id;
+                this.CreatedDate = record.CreatedDate;
+                this.Appointment = new AppointmentViewModel(record.Appointment);
+                this.Prescription = new PrescriptionViewmodel(record.Prescription);
+                this.MedicalResults = record.MedicalResults?.Select(x => new MedicalResultViewmodel(x)).ToList() ?? new List<MedicalResultViewmodel>();
+            }
         }
 
         public int Id { get; set; }

@@ -10,13 +10,16 @@ namespace HeathcareSystem.ViewModels
     {
         public ProfileViewmodel(Profile profile)
         {
-            this.Id = profile.Id;
-            this.FirstName = profile.FirstName;
-            this.LastName = profile.LastName;
-            this.DisplayName = profile.DisplayName;
-            this.MobiPhone = profile.MobiPhone;
-            this.HomePhone = profile.HomePhone;
-            this.Avatar = profile.Avatar;
+            if (profile != null)
+            {
+                this.Id = profile.Id;
+                this.FirstName = profile.FirstName;
+                this.LastName = profile.LastName;
+                this.DisplayName = profile.DisplayName;
+                this.MobiPhone = profile.MobiPhone;
+                this.HomePhone = profile.HomePhone;
+                this.Avatar = profile.Avatar;
+            }
         }
         public int Id { get; set; }
         public string FirstName { get; set; }
