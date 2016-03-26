@@ -19,10 +19,10 @@ namespace HeathcareSystem.Models
         public int? DepartmentId { get; set; }
         public Department Department { get; set; }
         [ForeignKey("Patient")]
-        public long PatientId { get; set; }
+        public int PatientId { get; set; }
         public Profile Patient { get; set; }
         [ForeignKey("Doctor")]
-        public long? DoctorId { get; set; }
+        public int? DoctorId { get; set; }
         public Profile Doctor { get; set; }
         [ForeignKey("Appointment")]
         public int AppointmentId { get; set; }

@@ -22,4 +22,11 @@ namespace HeathcareSystem.Enums
         Completed,
         Inqueue,
     }
+
+    public enum RequestRecordStatus
+    {
+        Accepted,
+        Rejected,
+        Pending,
+    }
 }

@@ -14,14 +14,15 @@ namespace Healthcare.Models
         public int PatientId { get; set; }
         public virtual Profile Patient { get; set; }
         [ForeignKey("Doctor")]
-        public long DoctorId { get; set; }
+        public int DoctorId { get; set; }
         public virtual Profile Doctor { get; set; }
+        [ForeignKey("Department")]
+        public int DepartmentId { get; set; }
+        public virtual Department Department { get; set; }
         public DateTime Time { get; set; }
-
         public AppointmentStatus Status { get; set; }
         [ForeignKey("Request")]
         public int RequestId { get; set; }
-
         public AppointmentRequest Request { get; set; }
     }
 }
