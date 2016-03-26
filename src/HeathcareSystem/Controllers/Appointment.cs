@@ -32,7 +32,9 @@ namespace HeathcareSystem.Controllers
                 PatientId = CurrentUser.Id,
                 StartTime = model.StartTime,
                 EndTime = model.EndTime,
-                Description = model.Description
+                Description = model.Description,
+                DoctorId = model.DoctorId,
+                Status = RequestStatus.Confirmed
             };
             context.AppointmentRequests.Add(appointmentRequest);
             context.SaveChange();
@@ -46,7 +48,14 @@ namespace HeathcareSystem.Controllers
             var random = new Random();
             if (request.DoctorId != null)
             {
-                var appointment = new Appointment { DoctorId = request.DoctorId.Value, Time = request.StartTime, Status = AppointmentStatus.InProcess, RequestId = request.Id };
+                var appointment = new Appointment
+                {
+                    DoctorId = request.DoctorId.Value,
+                    Time = request.StartTime,
+                    Status = AppointmentStatus.InProcess,
+                    RequestId = request.Id,
+                    DepartmentId = request.DepartmentId.Value
+                };
                 return CreateAppointment(appointment, context);
 
             }
@@ -54,7 +63,14 @@ namespace HeathcareSystem.Controllers
             if (request.DepartmentId != null)
             {
                 var doctorIs = context.DoctorInDepartments.Where(n => n.DepartmentId == request.DepartmentId.Value).Select(n => n.DepartmentId).ToList();
-                var appointment = new Appointment { DoctorId = doctorIs[random.Next(doctorIs.Count)], Time = request.StartTime, Status = AppointmentStatus.InProcess, RequestId = request.Id };
+                var appointment = new Appointment
+                {
+                    DoctorId = doctorIs[random.Next(doctorIs.Count)],
+                    Time = request.StartTime,
+                    Status = AppointmentStatus.InProcess,
+                    RequestId = request.Id,
+                    DepartmentId = request.DepartmentId.Value
+                };
                 return CreateAppointment(appointment, context);
             }
             return null;
@@ -63,16 +79,21 @@ namespace HeathcareSystem.Controllers
         [HttpGet]
         public IActionResult GetPattientInCommingAppointment()
         {
-            var appointments = context.Appointments.Include(n => n.Request.Doctor).Where(n => n.Request.PatientId == CurrentUser.Id && (n.Status == AppointmentStatus.InProcess || n.Status == AppointmentStatus.Inqueue));
+            var appointments = context.Appointments.Include(n => n.Request).Include(n => n.Doctor).Where(n => n.Request.PatientId == CurrentUser.Id && (n.Status == AppointmentStatus.InProcess || n.Status == AppointmentStatus.Inqueue));
             var doctors = context.DoctorInDepartments.Include(n => n.Department.Hospital);
             var appointmentViewModels = new List<AppointmentViewModel>();
             foreach (var a in appointments)
             {
-                var hospital = doctors.SingleOrDefault(n => n.DoctorId == a.Id);
+                var hospital = doctors.SingleOrDefault(n => n.DoctorId == a.DoctorId);
                 appointmentViewModels.Add(new AppointmentViewModel
                 {
-                    Department = new DepartmentViewmodel(hospital.Department),
-                    Doctor = new ProfileViewmodel(a.Request.Doctor),
+                    Department = new DepartmentViewmodel()
+                    {
+                        Id = hospital.Department.Id,
+                        Name = hospital.Department.Name,
+                        Hospital = new HospitalViewmodel { Id = hospital.Department.HospitalId, Name = hospital.Department.Hospital.Name }
+                    },
+                    Doctor = new ProfileViewmodel(a.Doctor),
                     Description = a.Request.Description,
                     Id = a.Id,
                     Time = a.Time

@@ -85,6 +85,21 @@ namespace HeathcareSystem.DataStuff
             }
             context.SaveChange();
         }
+
+        public static List<Profile> SeedDoctor(this UserManager<User> _userManager, HealthCareContext context, int count = 20)
+        {
+            var result = new List<Profile>();
+            for (var i = 0; i < count; ++i)
+            {
+                var profile = new Profile { DisplayName = $"Doctor{i}" };
+                context.Profiles.Add(profile);
+                context.SaveChange();
+                result.Add(profile);
+                _userManager.CreateUser(profile, profile.DisplayName, "123456", "Doctor");
+            }
+            return result;
+        }
+
         public static void SeedDoctoc(this UserManager<User> _userManager, List<Profile> profiles)
         {
             for (var i = 0; i < profiles.Count; i++)

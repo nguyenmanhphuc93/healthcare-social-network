@@ -1,4 +1,5 @@
 ﻿using Healthcare.Models;
+using HeathcareSystem.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -28,5 +29,6 @@ namespace HeathcareSystem.Models
         public int AppointmentId { get; set; }
         public Appointment Appointment { get; set; }
         public string Description { get; set; }
+        public RequestStatus Status { get; set; }
     }
 }

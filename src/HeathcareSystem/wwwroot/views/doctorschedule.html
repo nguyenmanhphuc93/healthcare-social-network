@@ -11,10 +11,12 @@
                 Doctor
             </th>
         </tr>
-        <tr ng-repeat="appointment in appointments">
-            <td ng-bind="appointment.time"></td>
+        <tr ng-show="loaded && appointments.length ==0"><td colspan="3" style="text-align:center">No Plan</td></tr>
+        <tr ng-show="!loaded"><td>Loading</td></tr>
+        <tr ng-repeat="appointment in appointments" style="text-align:center">
+            <td>{{appointment.time.format("DD/MM/YYYY HH:mm:ss")}}</td>
             <td ng-bind="appointment.department.hospital.name"></td>
-            <td ng-bind="appointment.doctor.name"></td>
+            <td ng-bind="appointment.doctor.displayName"></td>
         </tr>
     </table>
 </div>

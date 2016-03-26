@@ -121,8 +121,10 @@ namespace HeathcareSystem
             userManager.SeedPatient(patientProfiles);
             var managerProfiles = context.SeedProfile(2);
             userManager.SeedManager(managerProfiles);
-            var doctorProfiles = context.SeedProfile(48);
-            userManager.SeedDoctoc(doctorProfiles);
+            //var doctorProfiles = context.SeedProfile(48);
+            //userManager.SeedDoctoc(doctorProfiles);
+            //user
+            var profiles = userManager.SeedDoctor(context, 48);
             var departments = context.Departments.ToList();
             int index = 0;
             foreach (var doctor in departments)
