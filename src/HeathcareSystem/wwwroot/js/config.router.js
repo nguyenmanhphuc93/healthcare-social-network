@@ -35,17 +35,23 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $con
         controller: 'DashboardCtrl',
         title: 'Dashboard'
     })
-    .state('DoctorSchedule', {
-        url: '/dschedule',
-        templateUrl: '/views/doctorschedule.html',
-        controller: 'DoctorScheduleCtrl',
-        title: 'Schedule'
-    })
+    //.state('DoctorSchedule', {
+    //    url: '/dschedule',
+    //    templateUrl: '/views/doctorschedule.html',
+    //    controller: 'DoctorScheduleCtrl',
+    //    title: 'Schedule'
+    //})
     .state('PatientSchedule', {
-        url: '/pschedule',
-        templateUrl: '/views/patientschedule.html',
+        url: '/plan',
+        templateUrl: '/views/doctorschedule.html',
         controller: 'PatientScheduleCtrl',
-        title: 'Schedule'
+        title: 'Plan'
+    })
+    .state('DoctorSchedule', {
+        url: '/appointment',
+        templateUrl: '/views/patientschedule.html',
+        controller: 'DoctorScheduleCtrl',
+        title: 'Appointment'
     })
     .state('Schedule', {
         url: '/schedule',
