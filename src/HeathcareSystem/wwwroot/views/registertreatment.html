@@ -53,7 +53,16 @@
                     Doctor (Optional):
                 </td>
                 <td>
-                    <input ng-model="model.description" type="text">
+                    <select ng-options="item as item.displayName for item in department.doctors"
+                            ng-model="doctor"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Description:
+                </td>
+                <td>
+                    <input type="text" ng-model="model.Description"/>
                 </td>
             </tr>
             <tr>

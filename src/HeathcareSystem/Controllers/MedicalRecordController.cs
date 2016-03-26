@@ -27,7 +27,7 @@ namespace HeathcareSystem.Controllers
             {
                 if (this.repository == null)
                 {
-                    this.repository = new MedicalRecordRespository();
+                    this.repository = new MedicalRecordRespository(context);
                 }
                 return this.repository;
             }
@@ -130,35 +130,33 @@ namespace HeathcareSystem.Controllers
 
     public class MedicalRecordRespository
     {
+        IHealthcareContext context;
+        public MedicalRecordRespository(IHealthcareContext context)
+        {
+            this.context = context;
+        }
         private IEnumerable<MedicalRecordViewmodel> GetMedicalRecord(Expression<Func<MedicalRecord, bool>> predicate)
         {
-            using (var context = new HealthCareContext())
-            {
-                var medicalRecords = context.MedicalRecords.Where(predicate)
-                                                           .Include(n => n.Appointment).ThenInclude(x => x.Department).ThenInclude(x => x.Hospital)
-                                                           .Include(n => n.Appointment).ThenInclude(x => x.Doctor)
-                                                           .Include(n => n.Appointment).ThenInclude(x => x.Patient)
-                                                           .Include(n => n.MedicalResults).ThenInclude(n => n.Disease)
-                                                           .Include(n => n.Prescription).ThenInclude(n => n.Medicines)
-                                                           .AsEnumerable()
-                                                           .Select(n => new MedicalRecordViewmodel(n));
-                return medicalRecords;
+            var medicalRecords = context.MedicalRecords.Where(predicate)
+                                                       .Include(n => n.Appointment).ThenInclude(x => x.Department).ThenInclude(x => x.Hospital)
+                                                       .Include(n => n.Appointment).ThenInclude(x => x.Doctor)
+                                                       .Include(n => n.Appointment).ThenInclude(x => x.Patient)
+                                                       .Include(n => n.MedicalResults).ThenInclude(n => n.Disease)
+                                                       .Include(n => n.Prescription).ThenInclude(n => n.Medicines)
+                                                       .AsEnumerable()
+                                                       .Select(n => new MedicalRecordViewmodel(n));
+            return medicalRecords;
 
-            }
         }
 
         private RequestRecord GetRequestRecord(Expression<Func<RequestRecord, bool>> predicate)
         {
-            using (var context = new HealthCareContext())
-            {
-                var request = context.RequestRecords
-                                     .Include(n => n.Patient)
-                                     .Include(n => n.Record)
-                                     .Include(n => n.Diseases).ThenInclude(n => n.Disease)
-                                     .SingleOrDefault(predicate);
-                return request;
-
-            }
+            var request = context.RequestRecords
+                                 .Include(n => n.Patient)
+                                 .Include(n => n.Record)
+                                 .Include(n => n.Diseases).ThenInclude(n => n.Disease)
+                                 .SingleOrDefault(predicate);
+            return request;
         }
 
         internal RequestRecordViewmodel GetRequestRecordViewModel(int id)
@@ -178,14 +176,10 @@ namespace HeathcareSystem.Controllers
 
         internal IEnumerable<MedicalRecordViewmodel> GetRequestedRecordByPatient(int id, int currentRecordId)
         {
-            List<int> requestedDiseases = null;
-            using (var context = new HealthCareContext())
-            {
-                var requests = context.RequestRecords
-                                      .Include(n => n.Diseases)
-                                      .Where(n => n.Status == RequestRecordStatus.Accepted && n.RecordId == currentRecordId && n.PatientId == id);
-                requestedDiseases = requests.SelectMany(request => request.Diseases.Select(d => d.DiseaseId)).Distinct().ToList();
-            }
+            var requests = context.RequestRecords
+                                  .Include(n => n.Diseases)
+                                  .Where(n => n.Status == RequestRecordStatus.Accepted && n.RecordId == currentRecordId && n.PatientId == id);
+            var requestedDiseases = requests.SelectMany(request => request.Diseases.Select(d => d.DiseaseId)).Distinct().ToList();
             var records = GetMedicalRecord(record => record.Appointment.PatientId == id && record.MedicalResults.Any(result => requestedDiseases.Contains(result.DiseaseId)));
             return records;
         }
