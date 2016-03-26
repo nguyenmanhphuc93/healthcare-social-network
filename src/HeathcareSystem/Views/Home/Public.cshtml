@@ -42,8 +42,8 @@
 
         .l-side {
             padding: 14px;
-            background-color:rgb(240,240,240);
-            min-height:800px;
+            background-color: rgb(240,240,240);
+            min-height: 800px;
         }
 
         .r-side {
@@ -51,70 +51,104 @@
         }
 
         .ref-border {
-            margin:auto;
-            background-color:white;
-            width:696px;
-            padding-top:9px;
-            padding-left:9px;
+            margin: auto;
+            background-color: white;
+            width: 696px;
+            padding-top: 9px;
+            padding-left: 9px;
         }
-          .ref-heading {
+
+        .ref-heading {
             border: solid rgb(200,200,200) 1px;
-            text-align:center;
-            margin-right:7px;
-            margin-bottom:5px;
+            text-align: center;
+            margin-right: 7px;
+            margin-bottom: 5px;
         }
-        .welcome-border{
-                  padding-top: 150px;
+
+        .welcome-border {
+            padding-top: 150px;
         }
-         .ref-heading p{
-             font-size:32px;
-             margin:0px;
-             padding:14px;
-         }
+
+        .ref-heading p {
+            font-size: 32px;
+            margin: 0px;
+            padding: 14px;
+        }
     </style>
 </head>
 <body>
-    <div class="col-md-4 r-side pull-right">
-        <div class="welcome-border">
-            <h3>Welcome to</h3>
-            <h1>
-                Healthcare Social Network
-            </h1>
-            <h3>Please login to use the facilities</h3>
-        </div>     
-    </div>
-    <div class="col-md-8 l-side pull-right">
-        <div class="ref-border">
-            <div class="ref-heading">
-                <p>
-                    Recent medical events
-                </p>
-            </div>
-            <div class="b-img-frame">
-                <div class="b-img-frame-inner">
-                    <a href="#">
-                        <img src="/images/ref1.jpg">
-                    </a>
+    <header class="navbar navbar-default navbar-static-top">
+    </header>
+
+    <div class="error-full-page">
+        <div class="container">
+            <div style="min-height:550px" class="row">
+                <div class="col-sm-12 page-error">
+                    <p style="font-size:96px; padding:0px; margin-bottom:-15px" class="text-azure">
+                        Healthcare
+                    </p>
+                    <p style="font-size:60px" class="text-blue">
+                        Social Network
+                    </p>
+                    <div class="error-details col-sm-6 col-sm-offset-3">
+                        <h3>Please login to use the facilities</h3>
+                        <a href="index.html" class="btn btn-primary btn-return">
+                            Login
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="b-img-frame">
-                <div class="b-img-frame-inner">
-                    <a href="#">
-                        <img src="/images/ref2.jpg">
-                    </a>
-                </div>
-            </div>
-            <div class="b-img-frame">
-                <div class="b-img-frame-inner">
-                    <a href="#">
-                        <img src="/images/ref3.jpg">
-                    </a>
-                </div>
-            </div>
-            <div style="clear: both">
             </div>
         </div>
     </div>
+
+    <footer>
+        <div style="border:1px solid rgb(180,180,180); text-align:center" class="navbar-default">
+                Designed for Smart City Hackathon Contest
+        </div>
+    </footer>
+
+
+    @*<div class="col-md-4 r-side pull-right">
+            <div class="welcome-border">
+                <h3>Welcome to</h3>
+                <h1>
+                    Healthcare Social Network
+                </h1>
+                <h3>Please login to use the facilities</h3>
+            </div>
+        </div>
+        <div class="col-md-8 l-side pull-right">
+            <div class="ref-border">
+                <div class="ref-heading">
+                    <p>
+                        Recent medical events
+                    </p>
+                </div>
+                <div class="b-img-frame">
+                    <div class="b-img-frame-inner">
+                        <a href="#">
+                            <img src="/images/ref1.jpg">
+                        </a>
+                    </div>
+                </div>
+                <div class="b-img-frame">
+                    <div class="b-img-frame-inner">
+                        <a href="#">
+                            <img src="/images/ref2.jpg">
+                        </a>
+                    </div>
+                </div>
+                <div class="b-img-frame">
+                    <div class="b-img-frame-inner">
+                        <a href="#">
+                            <img src="/images/ref3.jpg">
+                        </a>
+                    </div>
+                </div>
+                <div style="clear: both">
+                </div>
+            </div>
+        </div>*@
 
 </body>
 </html>
