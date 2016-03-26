@@ -53,7 +53,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $con
         controller: 'RegisterTreatmentCtrl',
         title: 'Register treatment'
     })
-     .state('statistic', {
+     .state('Statistic', {
          url: '/statistic',
          templateUrl: '/views/statistic.html',
          controller: 'StatisticCtrl',
