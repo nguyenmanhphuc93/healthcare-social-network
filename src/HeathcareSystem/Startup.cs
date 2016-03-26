@@ -116,6 +116,7 @@ namespace HeathcareSystem
 
             context.SeedDepartment();
             roleManager.SeedRole();
+            context.SeedDisease();
             var patientProfiles = context.SeedProfile(5);
             userManager.SeedPatient(patientProfiles);
             var managerProfiles = context.SeedProfile(2);

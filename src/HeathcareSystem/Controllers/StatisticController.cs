@@ -24,15 +24,13 @@ namespace HeathcareSystem.Controllers
         public IActionResult GetProvinces()
         {
             var stuff = new GraphStuff();
-
-            return Ok(stuff.SeedSicknessInProvince(context));
+            return Ok(stuff.SeedSicknessInProvince());
         }
         [HttpGet]
         public IActionResult GetDiceases()
         {
             var stuff = new GraphStuff();
-
-            return Ok(stuff.SeedLocationSickness(context));
+            return Ok(stuff.SeedLocationSickness());
         }
 
         [HttpGet("{id}")]

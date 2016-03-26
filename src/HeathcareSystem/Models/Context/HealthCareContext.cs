@@ -18,8 +18,8 @@ namespace Healthcare.Models
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public DbSet<AppointmentRequest> AppointmentRequests { get; set; }
+        public DbSet<RequestRecord> RequestRecords { get; set; }
         public DbSet<Notification> Notifications { get; set; }
-
         public int SaveChange()
         {
             return base.SaveChanges();

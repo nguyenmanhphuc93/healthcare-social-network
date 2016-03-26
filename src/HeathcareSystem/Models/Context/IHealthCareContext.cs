@@ -17,7 +17,7 @@ namespace Healthcare.Models
         DbSet<Profile> Profiles { get; set; }
         DbSet<AppointmentRequest> AppointmentRequests { get; set; }
         DbSet<Examination> Examinations { get; set; }
-        DbSet<Notification> Notifications { get; set; }
+        DbSet<RequestRecord> RequestRecords { get; set; }
         int SaveChange();
         void SetState(object entity, EntityState state);
     }
