@@ -23,4 +23,24 @@
                 console.log('error of ' + $scope.input);
             })
     }
+
+    var getRecord = function () {
+        return $http({
+            method: 'GET',
+            url: '/api/MedicalRecord/GetRecords',
+        });
+    }
+
+    getRecord().success(function (data) {
+        $scope.records = data;
+        for (var i = 0; i < $scope.records.length; ++i) {
+            var datetime = new Date($scope.records[i].appointment.time);
+            
+            $scope.records[i].appointment.time = moment($scope.records[i].appointment.time).format('DD/MM/YYYY HH:ss:mm');
+            if (datetime.getFullYear >= 1990) {
+                $scope.records[i].appointment.time += '';
+            }
+        }
+        console.log(data);
+    })
 });

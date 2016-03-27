@@ -15,12 +15,12 @@ app.controller('IndexCtrl', function ($scope, $http) {
 
     function getNotification() {
         $http.get('/api/medicalrecord/GetNotifications').then(function (data) {
-            $scope.notification = data.data;
+            $scope.notifications = data.data;
         });
     };
-    getNotification();
+
+    window.setInterval(getNotification, 3000);
     $http.get('/api/role/GetCurrentUserRoles').then(function (data) {
-        console.log(data);
         $scope.role = data.data[0];
     });
 });

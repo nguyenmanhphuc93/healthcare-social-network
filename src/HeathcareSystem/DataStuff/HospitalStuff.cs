@@ -107,6 +107,13 @@ namespace HeathcareSystem.DataStuff
                 _userManager.CreateUser(profiles[i], $"Doctor{i}", "123456", "Doctor");
             }
         }
+        public static void SeedPharmacist(this UserManager<User> _userManager, List<Profile> profiles)
+        {
+            for (var i = 0; i < profiles.Count; i++)
+            {
+                _userManager.CreateUser(profiles[i], $"Pharmacist{i}", "123456", "Pharmacist");
+            }
+        }
 
         //public static void AddDoctor
         public static void SeedPatient(this UserManager<User> _userManager, List<Profile> profiles)

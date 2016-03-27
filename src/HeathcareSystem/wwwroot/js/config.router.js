@@ -41,15 +41,21 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider, $con
     //    controller: 'DoctorScheduleCtrl',
     //    title: 'Schedule'
     //})
+    .state('Notification', {
+        url: '/notification/:type/:id',
+        templateUrl: '/views/notification.html',
+        controller: 'NotificationCtrl',
+        title: 'Notification'
+    })
     .state('PatientSchedule', {
         url: '/plan',
-        templateUrl: '/views/doctorschedule.html',
+        templateUrl: '/views/patientschedule.html',
         controller: 'PatientScheduleCtrl',
         title: 'Plan'
     })
     .state('DoctorSchedule', {
         url: '/appointment',
-        templateUrl: '/views/patientschedule.html',
+        templateUrl: '/views/doctorschedule.html',
         controller: 'DoctorScheduleCtrl',
         title: 'Appointment'
     })

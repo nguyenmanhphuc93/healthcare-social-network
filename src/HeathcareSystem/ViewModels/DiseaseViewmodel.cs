@@ -14,9 +14,11 @@ namespace HeathcareSystem.ViewModels
             {
                 this.Id = disease.Id;
                 this.Description = disease.Description;
+                this.Name = disease.Name;
             }
         }
         public int Id { get; set; }
         public string Description { get; set; }
+        public string Name { get; set; }
     }
 }

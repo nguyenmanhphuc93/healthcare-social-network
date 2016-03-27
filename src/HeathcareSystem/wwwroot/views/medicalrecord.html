@@ -1,30 +1,31 @@
 ﻿
 <div class="col-md-12">
-    <table class="table table-bordered table-condensed">
+    <table class="table table-bordered table-condensed" ng-repeat="record in records">
         <tbody>
             <tr>
-                <th colspan="4">XX, XX, XXX (Next re-check at XXX)</th>
+                <th colspan="4">{{record.appointment.time}} <span ng-show="!record.appointment.time">(Next re-check at XXX)</span></th>
             </tr>
             <tr>
                 <td width="120px">Hospital:</td>
                 <td>
-      
+                    Hospital 2
                 </td>
                 <td width="120px">Doctor:</td>
                 <td>
-                   
+                    {{record.appointment.doctor.displayName}}
                 </td>
             </tr>
             <tr>
                 <td colspan="1">Sickness:</td>
-                <td colspan="3">
-
-                </td>
+                <td colspan="3"></td>
             </tr>
             <tr>
                 <td colspan="1">Diagnose:</td>
                 <td colspan="3">
+                    <span ng-repeat="result in record.medicalResults">
+                        {{result.disease.name}}{{!$last?',':''}}
 
+                    </span>
                 </td>
             </tr>
             <tr>
@@ -37,9 +38,7 @@
             </tr>
             <tr>
                 <td colspan="1">Comment:</td>
-                <td colspan="3">
-
-                </td>
+                <td colspan="3"></td>
             </tr>
         </tbody>
     </table>

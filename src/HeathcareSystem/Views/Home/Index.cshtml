@@ -7,6 +7,7 @@
     <link href="/css/plugins.css" rel="stylesheet" />
     <link href="/css/styles.css" rel="stylesheet" />
     <script src="/lib/angular/angular.js"></script>
+    <script src="~/lib/angular-route/angular-route.min.js"></script>
     <script src="/lib/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/lib/jquery/dist/jquery.js"></script>
     <link href="/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
@@ -32,6 +33,7 @@
     <script src="/controllers/doctorScheduleCtrl.js"></script>
     <script src="/controllers/patientScheduleCtrl.js"></script>
     <script src="/controllers/statisticCtrl.js"></script>
+    <script src="~/controllers/NotificationCtrl.js"></script>
     <script src="/controllers/registerTreatmentCtrl.js"></script>
     <script src="/controllers/medicalRecordCtrl.js"></script>
     <script src="/controllers/testCtrl.js"></script>
@@ -72,7 +74,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li ng-show="role == 'Doctor'" ng-class="state==3?'active open':''">
+                        <li ng-class="state==3?'active open':''">
                             <a ui-sref="DoctorSchedule" ng-click="state=3">
                                 <div class="item-content">
                                     <div class="item-media">
@@ -84,7 +86,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li ng-show="role == 'Patient'" ng-class="state==4?'active open':''">
+                        <li ng-show="role == 'Doctor'" ng-class="state==4?'active open':''">
                             <a ui-sref="PatientSchedule" ng-click="state=4">
                                 <div class="item-content">
                                     <div class="item-media">
@@ -108,7 +110,7 @@
                                 </div>
                             </a>
                         </li>
-                        <li ng-class="state==6?'active open':''">
+                        <li ng-show="role == 'Manager'" ng-class="state==6?'active open':''">
                             <a ui-sref="Statistic" ng-click="state=6">
                                 <div class="item-content">
                                     <div class="item-media">
@@ -139,12 +141,13 @@
                                 <li>
                                     <div class="drop-down-wrapper ps-container">
                                         <div class="list-group no-margin">
-                                            <a class="media list-group-item" href="">
-                                                <span class="media-body block no-margin"> Notification 1 </span>
-                                            </a>
-                                            <a class="media list-group-item" href="">
-                                                <span class="media-body block no-margin"> Notification 2 </span>
-                                            </a>
+                                            @*<a class="media list-group-item" href="">
+                                                    <span class="media-body block no-margin"> Notification 1 </span>
+                                                </a>
+                                                <a class="media list-group-item" href="">
+                                                    <span class="media-body block no-margin"> Notification 2 </span>
+                                                </a>*@
+                                            <a ng-repeat="noti in notifications" href="{{noti.url}}">{{noti.content}}</a>
                                         </div>
                                     </div>
                                 </li>

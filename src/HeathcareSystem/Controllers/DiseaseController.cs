@@ -11,7 +11,7 @@ using Microsoft.Data.Entity;
 
 namespace HeathcareSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class DiseaseController : Controller
     {
         IHealthcareContext context;

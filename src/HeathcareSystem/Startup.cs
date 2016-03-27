@@ -121,13 +121,15 @@ namespace HeathcareSystem
             userManager.SeedPatient(patientProfiles);
             var managerProfiles = context.SeedProfile(2);
             userManager.SeedManager(managerProfiles);
+            var pharmacistProfiles = context.SeedProfile(3);
+            userManager.SeedPharmacist(pharmacistProfiles);
             //var doctorProfiles = context.SeedProfile(48);
             //userManager.SeedDoctoc(doctorProfiles);
             //user
             var profiles = userManager.SeedDoctor(context, 48);
             var departments = context.Departments.ToList();
             int index = 0;
-            foreach (var doctor in departments)
+            foreach (var doctor in profiles)
             {
                 context.DoctorInDepartments.Add(new DoctorInDepartment { DepartmentId = departments[index].Id, DoctorId = doctor.Id });
                 index++;
