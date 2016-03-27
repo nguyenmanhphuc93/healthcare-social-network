@@ -14,6 +14,7 @@ namespace HeathcareSystem.DataStuff
             _userRole.CreateAsync(new IdentityRole<long>() { Name = "Doctor" }).Wait();
             _userRole.CreateAsync(new IdentityRole<long>() { Name = "Patient" }).Wait();
             _userRole.CreateAsync(new IdentityRole<long>() { Name = "Manager" }).Wait();
+            _userRole.CreateAsync(new IdentityRole<long>() { Name = "Pharmacist" }).Wait();
 
         }
     }

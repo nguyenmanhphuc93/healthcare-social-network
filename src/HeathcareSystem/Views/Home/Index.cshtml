@@ -122,6 +122,18 @@
                                 </div>
                             </a>
                         </li>
+                        <li ng-show="role == 'Pharmacist'" ng-class="state==6?'active open':''">
+                            <a ui-sref="Pharmacy" ng-click="state=6">
+                                <div class="item-content">
+                                    <div class="item-media">
+                                        <i class="ti-image"></i>
+                                    </div>
+                                    <div class="item-inner">
+                                        <span class="title"> Pharmacy </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -161,7 +173,7 @@
                         <!-- start: USER OPTIONS DROPDOWN -->
                         <li class="dropdown current-user">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="/images/user-2-icon.png" alt=""> <span class="username">User <i class="ti-angle-down"></i></i></span>
+                                <img src="/images/user-2-icon.png" alt=""> <span class="username" ng-cloak>{{ username }} <i class="ti-angle-down"></i></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
