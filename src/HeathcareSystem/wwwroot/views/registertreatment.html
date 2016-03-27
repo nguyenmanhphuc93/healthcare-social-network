@@ -97,8 +97,8 @@
         </div>
     </div>
 
-    <div ng-show="isSuccess" class="panel panel-primary" style="width: 400px; margin: auto">
-        <div class="panel-heading">
+    <div ng-show="isSuccess" class="panel panel-white" style="width: 400px; margin: auto">
+        <div class="panel-heading bg-azure">
             Successed!!!
         </div>
         <div class="panel-body">
@@ -107,20 +107,16 @@
             </h3>
             <br />
             Your appointment is at XX:XX at XXX.
-        </div>
-        <div>
-            <button style="float: right; margin-right: 14px; margin-bottom: 7px" class="btn btn-sm btn-primary" ui-sref="Dashboard">Ok</button>
-            <div style="clear: both"></div>
+            <div>
+                <button style="float: right; margin-right: 14px; margin-bottom: 7px" class="btn btn-sm btn-primary" ui-sref="DoctorSchedule">Ok</button>
+                <div style="clear: both"></div>
+            </div>
         </div>
     </div>
     <div style="clear:both"></div>
 </div>
 <div style="clear:both; height:60px"></div>
 <style>
-    .panel-body {
-        color: rgb(80,80,80);
-    }
-
     input {
         width: 100%;
     }

@@ -62,7 +62,7 @@ namespace HeathcareSystem.Controllers
 
             if (request.DepartmentId != null)
             {
-                var doctorIs = context.DoctorInDepartments.Where(n => n.DepartmentId == request.DepartmentId.Value).Select(n => n.DepartmentId).ToList();
+                var doctorIs = context.DoctorInDepartments.Where(n => n.DepartmentId == request.DepartmentId.Value).Select(n => n.DoctorId).ToList();
                 var appointment = new Appointment
                 {
                     DoctorId = doctorIs[random.Next(doctorIs.Count)],

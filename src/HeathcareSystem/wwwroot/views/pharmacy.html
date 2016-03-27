@@ -1,72 +1,78 @@
 ﻿<div class="col-md-12">
     <div class="form-group">
-        <div class="col-md-5">
-            <input class="form-control" type="text" placeholder="What's here?" />
+        <div class="col-md-6">
+           <input class="form-control" type="text" placeholder="Enter medical receipt code" />
         </div>
-        <input ng-click="showTable = true" class="btn btn-sm btn-default" type="button" value="Submit" />
+        <input ng-click="showTable = true" class="btn btn-default" type="button" value="Submit" />
     </div>
-    <table ng-show="showTable" class="table table-bordered">
-        <tr>
-            <td>
-                #
-            </td>
-            <td>
-                Name
-            </td>
-            <td>
-                Quatity
-            </td>
-            <td>
-                Unit
-            </td>
-        </tr>
-        <tr>
-            <td>
-                1
-            </td>
-            <td>
-                Panadol
-            </td>
-            <td>
-                1
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>
-                2
-            </td>
-            <td>
-                Vitamin B3
-            </td>
-            <td>
-                1
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>
-                3
-            </td>
-            <td>
-                Tiffy
-            </td>
-            <td>
-                1
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>
-                4
-            </td>
-            <td>
-                Decolgen
-            </td>
-            <td>
-                1
-            </td>
-            <td></td>
-        </tr>
-    </table>
+    <div class="col-md-12">
+        <table ng-show="showTable" class="table table-bordered table-condensed table-striped table-responsive">
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Quatity
+                </th>
+                <th>
+                    Unit
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    1
+                </td>
+                <td>
+                    Panadol
+                </td>
+                <td>
+                    8
+                </td>
+                <td>     pills</td>
+            </tr>
+            <tr>
+                <td>
+                    2
+                </td>
+                <td>
+                    Vitamin B3
+                </td>
+                <td>
+                    5
+                </td>
+                <td>     pills</td>
+            </tr>
+            <tr>
+                <td>
+                    3
+                </td>
+                <td>
+                    Tiffy
+                </td>
+                <td>
+                    6
+                </td>
+                <td>     
+                pills</td>
+            </tr>
+            <tr>
+                <td>
+                    4
+                </td>
+                <td>
+                    Decolgen
+                </td>
+                <td>
+                    8
+                </td>
+                <td>
+                    pills
+                </td>
+            </tr>
+        </table>
+    </div>
+
 </div>

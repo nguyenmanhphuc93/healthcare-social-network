@@ -26,6 +26,11 @@
                 <input class="btn btn-sm btn-default" type="button" value="Take turn" ng-click="startExam(p)" />
             </td>
         </tr>
+        <tr ng-show="patients.length==0">
+            <td style="text-align:center" colspan="4">
+                No appointment
+            </td>
+        </tr>
     </table>
 </div>
 <div id="patient-form" class="col-md-12" ng-show="showPatientForm">
@@ -62,7 +67,7 @@
 
         <tr>
             <td colspan="4">
-                <button style="margin-left:7px;" class="btn btn-sm btn-primary pull-right">Finish</button>
+                <button style="margin-left:7px;" class="btn btn-sm btn-primary pull-right" ng-click="finish()">Finish</button>
                 <button class="btn btn-sm btn-default pull-right">Cancel</button>
             </td>
         </tr>

@@ -93,12 +93,12 @@
     var getPatientRecordService = function () {
         return $http({
             method: 'Get',
-            url: '/api/MedicalRecord/GetRequestedRecordByPatient?id=' +$scope.curPatient.patient.id + '&currentRecordId=' +$scope.form.id,
+            url: '/api/MedicalRecord/GetRequestedRecordByPatient?id=' + $scope.curPatient.patient.id + '&currentRecordId=' + $scope.form.id,
         });
     }
 
     var getPatientRecord = function () {
-        if (!$scope.form.id) {
+        if (!$scope.form) {
             return;
         }
         getPatientRecordService().success(function (data) { $scope.medicalRecords = data });
@@ -106,4 +106,16 @@
 
     window.setInterval(getPatientRecord, 7000);
 
+    $scope.finish = function () {
+        console.log('enter');
+        $http.put('/api/MedicalRecord/FinishRecord?id=' + $scope.form.id)
+            .success(function () {
+                $scope.showPatientForm = false;
+                $scope.patients.splice($scope.patients.indexOf($scope.curPatient),1);
+            })
+            .error(function () {
+
+            });
+
+    }
 });
