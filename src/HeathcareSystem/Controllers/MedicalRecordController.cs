@@ -76,7 +76,7 @@ namespace HeathcareSystem.Controllers
             context.RequestRecords.Add(request);
             context.SaveChange();
 
-            CreateNotification(CurrentUser.Id, model.PatientId, $"Dr.{CurrentUser.FirstName} sent a request to ask your permission. ", $"api/MedicalRecord/GetRequestRecord/{request.Id}");
+            CreateNotification(CurrentUser.Id, model.PatientId, $"Dr.{CurrentUser.FirstName} sent a request to ask your permission. ", $"/notification/1/{request.Id}");
 
             return Ok(request.Id);
         }

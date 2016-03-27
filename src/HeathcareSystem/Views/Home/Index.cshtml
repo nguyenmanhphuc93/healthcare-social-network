@@ -29,7 +29,7 @@
 
     <!--Controllers-->
     <script src="/controllers/indexCtrl.js"></script>
-    <script src="/controllers/dashBoardCtrl.js"></script>
+    <script src="~/controllers/dashboardCtrl.js"></script>
     <script src="/controllers/doctorScheduleCtrl.js"></script>
     <script src="/controllers/patientScheduleCtrl.js"></script>
     <script src="/controllers/statisticCtrl.js"></script>
@@ -39,7 +39,7 @@
     <script src="/controllers/testCtrl.js"></script>
 
     <!--Services-->
-    <script src="/services/registertreatmentservice.js"></script>
+    <script src="~/services/registerTreatmentService.js"></script>
     <script src="/services/doctorScheduleService.js"></script>
 
     <script src="/js/config.router.js"></script>
@@ -173,7 +173,7 @@
                         <!-- start: USER OPTIONS DROPDOWN -->
                         <li class="dropdown current-user">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="/images/user-2-icon.png" alt=""> <span class="username">User <i class="ti-angle-down"></i></i></span>
+                                <img src="/images/user-2-icon.png" alt=""> <span class="username" ng-cloak>{{ username }} <i class="ti-angle-down"></i></i></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>

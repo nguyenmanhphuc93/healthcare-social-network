@@ -12,7 +12,11 @@
                     hospital.departments.push({ name: ''});
                 });
             });
-            $scope.provide = $scope.data[1];
+            $scope.data.forEach(function (item) {
+                if (item.province == 'Bình Dương') {
+                    $scope.provide = item;
+                }
+            });
             $scope.$watch('provide', function () {
                 if ($scope.provide && $scope.provide.hospitals) {
                     $scope.hospital = $scope.provide.hospitals[0];
