@@ -93,6 +93,21 @@ namespace HeathcareSystem.Controllers
             return Ok();
         }
 
+        [HttpPut]
+        public IActionResult FinishRecord(int id)
+        {
+            var record = context.MedicalRecords.Include(n => n.Appointment).SingleOrDefault(n => n.Id == id);
+            if (record == null)
+            {
+                return new HttpNotFoundResult();
+            }
+            record.Appointment.Status = AppointmentStatus.Completed;
+            context.SetState(record.Appointment, EntityState.Modified);
+            context.SaveChange();
+            return Ok();
+        }
+
+
         [HttpPost]
         public IActionResult CreateRecord([FromBody] CreateRecordBindingModel model)
         {
