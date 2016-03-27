@@ -10,120 +10,29 @@
             <th>
                 Status
             </th>
-            <th>
-                Comment
-            </th>
-            <th>
+            <th width="120px">
                 Action
             </th>
         </tr>
         <tr ng-repeat="p in patients">
             <td ng-bind="p.patient.displayName"></td>
             <td>
-               {{p.time.format("DD/MM/YYYY HH:mm:ss")}}
+                {{p.time.format("DD/MM/YYYY HH:mm:ss")}}
             </td>
             <td>
                 Waiting
             </td>
             <td>
-                ...
-            </td>
-            <td>
-                <input class="btn btn-sm btn-default" type="button"  value="Take turn" ng-click="startExam(p)"/>
+                <input class="btn btn-sm btn-default" type="button" value="Take turn" ng-click="startExam(p)" />
             </td>
         </tr>
-        <!--<tr>
-            <td>
-                Nguyen Thi N
-            </td>
-            <td>
-                08:00 27/03/2016
-            </td>
-            <td>
-                Finished
-            </td>
-            <td>
-                ...
-            </td>
-            <td>
-                <input class="btn btn-sm btn-default" type="button" ng-click="showPatientForm = true" value="Take turn" />
-            </td>
-        </tr>-->
     </table>
-
-    <!--<table class="table table-bordered  table-condensed">
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Time
-            </th>
-            <th>
-                Status
-            </th>
-            <th>
-                Comment
-            </th>
-            <th>
-                Action
-            </th>
-        </tr>
-        <tr>
-            <td>
-                Nguyen Van A
-            </td>
-            <td>
-                08:00 27/03/2016
-            </td>
-            <td>
-                Comming
-            </td>
-            <td>
-                ...
-            </td>
-            <td>
-                <input class="btn btn-sm btn-default" type="button" value="Show detail" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Nguyen Thi N
-            </td>
-            <td>
-                08:00 27/03/2016
-            </td>
-            <td>
-                Skipped
-            </td>
-            <td>
-                ...
-            </td>
-            <td>
-                <input class="btn btn-sm btn-default" type="button" value="Show detail" />
-            </td>
-        </tr>
-    </table>-->
 </div>
 <div id="patient-form" class="col-md-12" ng-show="showPatientForm">
     <table class="table table-bordered">
         <tbody>
             <tr>
-                <th colspan="4">Ngày {{currentDate}}</th>
-            </tr>
-            <!--<tr>
-                <td>Hospital:</td>
-                <td>
-                    <input class="form-control" type="text" />
-                </td>
-                <td>Doctor:</td>
-                <td>
-                    <input class="form-control" type="text" />
-                </td>
-            </tr>-->
-            <tr>
-                <td colspan="1">Sickness:</td>
-                <td colspan="3"><input class="form-control" type="text" /></td>
+                <th colspan="4">{{currentDate}}</th>
             </tr>
             <tr>
                 <td colspan="1">Diagnose:</td>
@@ -145,44 +54,54 @@
                 <td colspan="1"><input type="checkbox" /> Re-check</td>
                 <td colspan="3">
                     <div style="position:relative">
-                        At: <input id="recheck" type="text">
+                        <input id="recheck" type="text">
                     </div>
                 </td>
             </tr>
+        </tbody>
+
+        <tr>
+            <td colspan="4">
+                <button style="margin-left:7px;" class="btn btn-sm btn-primary pull-right">Finish</button>
+                <button class="btn btn-sm btn-default pull-right">Cancel</button>
+            </td>
+        </tr>
+
+    </table>
+
+    <table style="width:600px; margin:auto" class="table table-condensed table-bordered table-responsive">
+        <tbody>
             <tr>
+                <th colspan="2">
+                   Request Medical Record
+                </th>
+            </tr>
+            <tr>
+                <td style="text-align:center">Disease</td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="request in requests">
                 <td>
-                    <input class="btn btn-sm btn-default" type="button" value="Request medical record"/>
+                    <select class="form-control" ng-options="item.id as item.name for item in diseases"
+                            ng-model="request.id"></select>
                 </td>
-                <td colspan="3">
-                    <button style="margin-left:7px;" class="btn btn-sm btn-primary pull-right">Finish</button>
-                    <button class="btn btn-sm btn-default pull-right">Cancel</button>
+                <td width="80px">   
+                    <input class="btn btn-sm btn-default pull-right" type="button" ng-click="remove($index)" value="Remove" ng-show="!$first" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input style="margin-left:7px" class="btn btn-sm btn-primary pull-right" type="button" value="Request" ng-click="request()" />
+                    <input style="margin-left:7px" class="btn btn-sm btn-default pull-right" type="button" ng-click="add()" value="Add more" />
+                   
                 </td>
             </tr>
         </tbody>
     </table>
-    <table class="table table-bordered">
-        <tr>
-            <td>
-                Diseases
-            </td>
-            <td>
-                <input class="btn btn-default" type="button" value="Request"  ng-click="request()"/>
-            </td>
-        </tr>
-        <tr ng-repeat="request in requests">
-            <td>
-                <select class="form-control" ng-options="item.id as item.name for item in diseases"
-                        ng-model="request.id"></select>
-            </td>
-            <td>
-                <input class="btn btn-default" type="button" ng-click="add()" value="Add" ng-show="$first"/>
-                <input class="btn btn-default" type="button" ng-click="remove($index)" value="Remove" ng-show="!$first" />
-            </td>
-        </tr>
-        <!--<tr ng-repeat="request in requests">
-            <td colspan="2" ng-bind="request.name"></td>
-        </tr>-->
-    </table>
+
+    <div style="clear:both; height:60px;">
+
+    </div>
 </div>
 <style>
     textarea {

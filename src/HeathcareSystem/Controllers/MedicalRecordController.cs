@@ -115,6 +115,21 @@ namespace HeathcareSystem.Controllers
             return Ok();
         }
 
+        [HttpPut]
+        public IActionResult FinishRecord(int id)
+        {
+            var record = context.MedicalRecords.Include(n => n.Appointment).SingleOrDefault(n => n.Id == id);
+            if (record == null)
+            {
+                return new HttpNotFoundResult();
+            }
+            record.Appointment.Status = AppointmentStatus.Completed;
+            context.SetState(record.Appointment, EntityState.Modified);
+            context.SaveChange();
+            return Ok();
+        }
+
+
         [HttpPost]
         public IActionResult CreateRecord([FromBody] CreateRecordBindingModel model)
         {
@@ -145,16 +160,14 @@ namespace HeathcareSystem.Controllers
         {
             this.context = context;
         }
-        private IEnumerable<MedicalRecordViewmodel> GetMedicalRecord(Expression<Func<MedicalRecord, bool>> predicate)
+        private IEnumerable<MedicalRecord> GetMedicalRecord(Expression<Func<MedicalRecord, bool>> predicate)
         {
             var medicalRecords = context.MedicalRecords.Where(predicate)
                                                        .Include(n => n.Appointment).ThenInclude(x => x.Department).ThenInclude(x => x.Hospital)
                                                        .Include(n => n.Appointment).ThenInclude(x => x.Doctor)
                                                        .Include(n => n.Appointment).ThenInclude(x => x.Patient)
                                                        .Include(n => n.MedicalResults).ThenInclude(n => n.Disease)
-                                                       .Include(n => n.Prescription).ThenInclude(n => n.Medicines)
-                                                       .AsEnumerable()
-                                                       .Select(n => new MedicalRecordViewmodel(n));
+                                                       .Include(n => n.Prescription).ThenInclude(n => n.Medicines);
             return medicalRecords;
 
         }
@@ -181,7 +194,7 @@ namespace HeathcareSystem.Controllers
 
         internal IEnumerable<MedicalRecordViewmodel> GetMedicalRecordByPatient(int id)
         {
-            return GetMedicalRecord(x => x.Appointment.PatientId == id);
+            return GetMedicalRecord(x => x.Appointment.PatientId == id).Select(n => new MedicalRecordViewmodel(n)).OrderByDescending(n => n.CreatedDate);
         }
 
         internal IEnumerable<MedicalRecordViewmodel> GetRequestedRecordByPatient(int id, int currentRecordId)
@@ -191,7 +204,7 @@ namespace HeathcareSystem.Controllers
                                   .Where(n => n.Status == RequestRecordStatus.Accepted && n.RecordId == currentRecordId && n.PatientId == id);
             var requestedDiseases = requests.SelectMany(request => request.Diseases.Select(d => d.DiseaseId)).Distinct().ToList();
             var records = GetMedicalRecord(record => record.Appointment.PatientId == id && record.MedicalResults.Any(result => requestedDiseases.Contains(result.DiseaseId)));
-            return records;
+            return records.Select(n => new MedicalRecordViewmodel(n)).OrderByDescending(n => n.CreatedDate);
         }
     }
 
