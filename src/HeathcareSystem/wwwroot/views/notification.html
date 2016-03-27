@@ -1,24 +1,17 @@
 ﻿<div class="col-md-12">
-    <center><h2>Request detail</h2></center>
-    <table class="table table-bordered">
-        <tr ng-repeat="disease in request.diseases">
-            <td colspan="2" ng-bind="disease.name"></td>
-        </tr>
-        <!--<tr>
-            <td colspan="2" ng-bind="disease.name"></td>
-        </tr>-->
-        <!--<tr>
-            <td colspan="2">
-                Rubenla
-            </td>
-        </tr>-->
-        <tr>
-            <td>
-                <input class="btn btn-primary" type="button" value="Accept" ng-click="accept()" />
-            </td>
-            <td>
-                <input class="btn btn-default" type="button" value="Deline" ng-click="reject()" />
-            </td>
-        </tr>
-    </table>
+    <div style="width:700px; margin:auto" class="panel panel-white">
+        <div class="panel-heading">
+            <h4 class="panel-title text-primary">   Request detail</h4>
+         
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered">
+                <tr ng-repeat="disease in request.diseases">
+                    <td colspan="2" ng-bind="disease.name"></td>
+                </tr>
+           </table>
+            <input class="btn btn-sm btn-primary pull-right" style="margin-left:7px" type="button" value="Accept" ng-click="accept()" />
+            <input class="btn btn-sm btn-default pull-right" type="button" value="Deline" ng-click="reject()" />
+        </div>
+    </div>
 </div>

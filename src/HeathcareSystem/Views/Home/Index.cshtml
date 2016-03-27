@@ -3,14 +3,14 @@
 <head>
     <title ng-bind="pageTitle()"></title>
 
-    <link href="/css/themes/theme-1.css" rel="stylesheet" />
+    <link href="/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="/css/themes/theme-1.css" id="skin_color" rel="stylesheet" />
     <link href="/css/plugins.css" rel="stylesheet" />
     <link href="/css/styles.css" rel="stylesheet" />
     <script src="/lib/angular/angular.js"></script>
     <script src="~/lib/angular-route/angular-route.min.js"></script>
     <script src="/lib/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/lib/jquery/dist/jquery.js"></script>
-    <link href="/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/js/loader.js"></script>
 
@@ -141,13 +141,15 @@
                                 <li>
                                     <div class="drop-down-wrapper ps-container">
                                         <div class="list-group no-margin">
-                                            @*<a class="media list-group-item" href="">
+                                           @*<a class="media list-group-item" href="">
                                                     <span class="media-body block no-margin"> Notification 1 </span>
                                                 </a>
                                                 <a class="media list-group-item" href="">
                                                     <span class="media-body block no-margin"> Notification 2 </span>
                                                 </a>*@
-                                            <a ng-repeat="noti in notifications" href="{{noti.url}}">{{noti.content}}</a>
+                                            <a class="media list-group-item" ng-repeat="noti in notifications" href="{{noti.url}}">
+                                                <span style="line-height:16px" class="media-body block no-margin"> {{noti.content}} </span>                                 
+                                            </a>
                                         </div>
                                     </div>
                                 </li>
@@ -178,8 +180,9 @@
                     </ul>
                 </div>
             </header>
-            <div class="main-content" style="margin-top:0px">
+            <div class="main-content" style="margin-top:50px; padding-top:50px; background-color:white; min-height:570px">
                 <ui-view></ui-view>
+                <div style="clear:both"></div>
             </div>
         </div>
         <footer>
