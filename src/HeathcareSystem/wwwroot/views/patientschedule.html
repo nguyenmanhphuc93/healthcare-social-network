@@ -28,7 +28,7 @@
         </tr>
         <tr ng-show="patients.length==0">
             <td style="text-align:center" colspan="4">
-                No appointment
+                No Appointment
             </td>
         </tr>
     </table>
@@ -100,6 +100,49 @@
                     <input style="margin-left:7px" class="btn btn-sm btn-default pull-right" type="button" ng-click="add()" value="Add more" />
                    
                 </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-bordered table-condensed" ng-repeat="record in medicalRecords">
+        <tbody>
+            <tr>
+                <th colspan="4">{{record.appointment.time}} <span ng-show="!record.appointment.time">(Next re-check at XXX)</span></th>
+            </tr>
+            <tr>
+                <td width="120px">Hospital:</td>
+                <td>
+                    Hospital 2
+                </td>
+                <td width="120px">Doctor:</td>
+                <td>
+                    {{record.appointment.doctor.displayName}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1">Sickness:</td>
+                <td colspan="3"></td>
+            </tr>
+            <tr>
+                <td colspan="1">Diagnose:</td>
+                <td colspan="3">
+                    <span ng-repeat="result in record.medicalResults">
+                        {{result.disease.name}}{{!$last?',':''}}
+
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1">Examination:</td>
+                <td colspan="3"><button class="btn btn-sm btn-default">Detail</button> </td>
+            </tr>
+            <tr>
+                <td colspan="1">Treatment:</td>
+                <td colspan="3"><button class="btn btn-sm btn-default">Detail</button> </td>
+            </tr>
+            <tr>
+                <td colspan="1">Comment:</td>
+                <td colspan="3"></td>
             </tr>
         </tbody>
     </table>
